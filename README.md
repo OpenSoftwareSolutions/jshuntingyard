@@ -20,4 +20,4 @@ JHuntingYard is the advanced library for adding high-performance, mathematical, 
 [Official Webpage](https://www.open-software-solutions.ch)
 
 # Support
-Issues are posted [here](https://github.com/OpenSoftwareSolutions/jhuntingyard/issue).
+Issues are posted [here](https://github.com/OpenSoftwareSolutions/jhuntingyard/issues).
