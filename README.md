@@ -1,5 +1,8 @@
-# JHuntingYard
+#JHuntingYard
 JHuntingYard is the advanced library for adding high-performance, mathematical, Boolean and functional expression parsing and evaluation to your Java and Android applications. 
+
+#License
+[Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0)
 
 #Features
    * Parses and evaluates dynamic and static expressions at run time.
