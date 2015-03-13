@@ -19,8 +19,11 @@ JHuntingYard is the advanced library for adding high-performance, mathematical, 
    * JUnit tests.
    * Compatible with J2SE 1.5 and above.
 
-# Official Webpage
+#Download the Lib
+You either check out the project and build your version with ANT or you can get the latest lib from our [mvn-repo](https://github.com/OpenSoftwareSolutions/mvn-repo)
+
+#Official Webpage
 [Official Webpage](https://www.open-software-solutions.ch)
 
-# Support
+#Support
 Issues are posted [here](https://github.com/OpenSoftwareSolutions/jhuntingyard/issues).
