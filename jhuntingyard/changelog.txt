@@ -1,0 +1,20 @@
+
+JHuntingYard Library Change Log
+==============================================
+
+JHuntingYard 1.1.0Beta 				xx.xx.2015
+----------------------------------------------
+
+Bugfixes
+-
+
+
+Features
+-
+
+==============================================
+
+JHuntingYard 1.0.0Beta 				09.03.2015
+----------------------------------------------
+
+Initial release with basis functionalities.
