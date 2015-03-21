@@ -1,6 +1,6 @@
-package org.oss.evaluator.funtion.impl;
+package org.oss.evaluator.function.impl;
 
-import org.oss.evaluator.funtion.FunctionArgument;
+import org.oss.evaluator.function.FunctionArgument;
 
 @SuppressWarnings("rawtypes")
 public class VariableArgument implements FunctionArgument {

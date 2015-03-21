@@ -5,10 +5,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.oss.evaluator.funtion.ExpressionElement;
-import org.oss.evaluator.funtion.Function;
-import org.oss.evaluator.funtion.FunctionArgument;
-import org.oss.evaluator.funtion.impl.VariableArgument;
+import org.oss.evaluator.function.ExpressionElement;
+import org.oss.evaluator.function.Function;
+import org.oss.evaluator.function.FunctionArgument;
+import org.oss.evaluator.function.impl.VariableArgument;
 import org.oss.evaluator.parser.ExtendedHuntingYardParser;
 
 /**

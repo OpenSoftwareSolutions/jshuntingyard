@@ -1,8 +1,8 @@
 package org.oss.evaluator.function.math;
-import org.oss.evaluator.funtion.Function;
-import org.oss.evaluator.funtion.FunctionArgument;
-import org.oss.evaluator.funtion.impl.DoubleArgument;
-import org.oss.evaluator.funtion.impl.FunctionArgumentFactory;
+import org.oss.evaluator.function.Function;
+import org.oss.evaluator.function.FunctionArgument;
+import org.oss.evaluator.function.impl.DoubleArgument;
+import org.oss.evaluator.function.impl.FunctionArgumentFactory;
 import org.oss.evaluator.operator.AbstractOperator;
 
 

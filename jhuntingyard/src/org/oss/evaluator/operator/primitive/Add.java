@@ -1,9 +1,9 @@
 package org.oss.evaluator.operator.primitive;
-import org.oss.evaluator.funtion.Function;
-import org.oss.evaluator.funtion.FunctionArgument;
-import org.oss.evaluator.funtion.impl.FunctionArgumentFactory;
-import org.oss.evaluator.funtion.impl.IntegerArgument;
-import org.oss.evaluator.funtion.impl.StringArgument;
+import org.oss.evaluator.function.Function;
+import org.oss.evaluator.function.FunctionArgument;
+import org.oss.evaluator.function.impl.FunctionArgumentFactory;
+import org.oss.evaluator.function.impl.IntegerArgument;
+import org.oss.evaluator.function.impl.StringArgument;
 
 
 

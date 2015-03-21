@@ -1,7 +1,7 @@
-package org.oss.evaluator.funtion.impl;
+package org.oss.evaluator.function.impl;
 
-import org.oss.evaluator.funtion.AbstractFunctionArgument;
-import org.oss.evaluator.funtion.FunctionArgument;
+import org.oss.evaluator.function.AbstractFunctionArgument;
+import org.oss.evaluator.function.FunctionArgument;
 
 /**
  * Copyright [2015] [Open Software Solutions GmbH]
@@ -16,27 +16,26 @@ import org.oss.evaluator.funtion.FunctionArgument;
  * limitations under the License.
  *
  */
-public class StringArgument extends AbstractFunctionArgument<String> implements Comparable<StringArgument> {
+public class IntegerArgument extends AbstractFunctionArgument<Integer> implements Comparable<IntegerArgument>{
 
-	private final String stringValue;
+	private final Integer intValue;
 
-	StringArgument(String stringValue) {
-		this.stringValue = stringValue;
+	IntegerArgument(Integer intValue) {
+		this.intValue = intValue;
 	}
 
 	@Override
 	public FunctionArgument.ArgumentType getType() {
-		return FunctionArgument.ArgumentType.STRING;
+		return FunctionArgument.ArgumentType.INTEGER;
 	}
 
 	@Override
-	public String getValue() {
-		return stringValue;
+	public Integer getValue() {
+		return intValue;
 	}
 
 	@Override
-	public int compareTo(StringArgument o) {
-		return stringValue.compareTo(o.getValue());
+	public int compareTo(IntegerArgument o) {
+		return intValue.compareTo(o.getValue());
 	}
-
 }

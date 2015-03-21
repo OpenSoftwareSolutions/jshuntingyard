@@ -1,7 +1,7 @@
-package org.oss.evaluator.funtion.impl;
+package org.oss.evaluator.function.impl;
 
-import org.oss.evaluator.funtion.AbstractFunctionArgument;
-import org.oss.evaluator.funtion.FunctionArgument;
+import org.oss.evaluator.function.AbstractFunctionArgument;
+import org.oss.evaluator.function.FunctionArgument;
 
 /**
  * Copyright [2015] [Open Software Solutions GmbH]
@@ -28,7 +28,7 @@ public class BooleanArgument extends AbstractFunctionArgument<Boolean> implement
 	}
 
 	@Override
-	public org.oss.evaluator.funtion.FunctionArgument.ArgumentType getType() {
+	public org.oss.evaluator.function.FunctionArgument.ArgumentType getType() {
 		return FunctionArgument.ArgumentType.BOOLEAN;
 	}
 

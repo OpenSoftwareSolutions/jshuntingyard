@@ -3,8 +3,8 @@ package org.oss.evaluator;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
-import org.oss.evaluator.funtion.FunctionArgument;
-import org.oss.evaluator.funtion.impl.BooleanArgument;
+import org.oss.evaluator.function.FunctionArgument;
+import org.oss.evaluator.function.impl.BooleanArgument;
 
 /**
  * Copyright [2015] [Open Software Solutions GmbH]

@@ -1,7 +1,7 @@
-package org.oss.evaluator.funtion.impl;
+package org.oss.evaluator.function.impl;
 
-import org.oss.evaluator.funtion.AbstractFunctionArgument;
-import org.oss.evaluator.funtion.FunctionArgument;
+import org.oss.evaluator.function.AbstractFunctionArgument;
+import org.oss.evaluator.function.FunctionArgument;
 
 /**
  * Copyright [2015] [Open Software Solutions GmbH]
@@ -16,26 +16,16 @@ import org.oss.evaluator.funtion.FunctionArgument;
  * limitations under the License.
  *
  */
-public class DoubleArgument extends AbstractFunctionArgument<Double> implements Comparable<DoubleArgument>{
-
-	private final Double doubleValue;
-
-	DoubleArgument(Double doubleValue) {
-		this.doubleValue = doubleValue;
-	}
+public class NullArgument extends AbstractFunctionArgument<Object>{
 
 	@Override
 	public FunctionArgument.ArgumentType getType() {
-		return FunctionArgument.ArgumentType.DOUBLE;
+		return FunctionArgument.ArgumentType.NULL;
 	}
 
 	@Override
-	public Double getValue() {
-		return doubleValue;
+	public Object getValue() {
+		return null;
 	}
 
-	@Override
-	public int compareTo(DoubleArgument o) {
-		return doubleValue.compareTo(o.getValue());
-	}
 }

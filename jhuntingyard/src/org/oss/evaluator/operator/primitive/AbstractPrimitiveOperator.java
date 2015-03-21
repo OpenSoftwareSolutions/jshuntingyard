@@ -1,5 +1,5 @@
 package org.oss.evaluator.operator.primitive;
-import org.oss.evaluator.funtion.FunctionArgument;
+import org.oss.evaluator.function.FunctionArgument;
 import org.oss.evaluator.operator.AbstractOperator;
 
 

@@ -2,8 +2,8 @@ package org.oss.evaluator.parser;
 
 import java.util.ArrayList;
 
-import org.oss.evaluator.funtion.ExpressionElement;
-import org.oss.evaluator.funtion.impl.FunctionArgumentFactory;
+import org.oss.evaluator.function.ExpressionElement;
+import org.oss.evaluator.function.impl.FunctionArgumentFactory;
 
 /**
  * Copyright [2015] [Open Software Solutions GmbH]

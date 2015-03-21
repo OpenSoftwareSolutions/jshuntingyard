@@ -1,7 +1,7 @@
-package org.oss.evaluator.operator.relational;
+package org.oss.evaluator.function.impl;
 
+import org.oss.evaluator.function.AbstractFunctionArgument;
 import org.oss.evaluator.function.FunctionArgument;
-import org.oss.evaluator.function.impl.FunctionArgumentFactory;
 
 /**
  * Copyright [2015] [Open Software Solutions GmbH]
@@ -16,20 +16,27 @@ import org.oss.evaluator.function.impl.FunctionArgumentFactory;
  * limitations under the License.
  *
  */
-public class LessThanOrEqualTo extends AbstractRelationalOperator {
+public class StringArgument extends AbstractFunctionArgument<String> implements Comparable<StringArgument> {
 
-	public LessThanOrEqualTo() {
-		super("<=",Precedence.RELATIONAL);
+	private final String stringValue;
+
+	StringArgument(String stringValue) {
+		this.stringValue = stringValue;
 	}
 
 	@Override
-	protected FunctionArgument<Boolean> execute(Relation relation)
-			throws IllegalArgumentException {
-		return FunctionArgumentFactory.createObject(Relation.LESSER==relation || Relation.EQUAL==relation);
+	public FunctionArgument.ArgumentType getType() {
+		return FunctionArgument.ArgumentType.STRING;
 	}
 
 	@Override
-	public boolean isUserFunction() {
-		return false;
+	public String getValue() {
+		return stringValue;
 	}
+
+	@Override
+	public int compareTo(StringArgument o) {
+		return stringValue.compareTo(o.getValue());
+	}
+
 }

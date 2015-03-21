@@ -1,6 +1,6 @@
 package org.oss.evaluator.operator;
-import org.oss.evaluator.funtion.Function;
-import org.oss.evaluator.funtion.FunctionArgument;
+import org.oss.evaluator.function.Function;
+import org.oss.evaluator.function.FunctionArgument;
 
 
 /**

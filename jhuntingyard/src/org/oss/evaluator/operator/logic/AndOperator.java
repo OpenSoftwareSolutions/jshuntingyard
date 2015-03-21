@@ -1,7 +1,7 @@
 package org.oss.evaluator.operator.logic;
 
-import org.oss.evaluator.funtion.FunctionArgument;
-import org.oss.evaluator.funtion.impl.FunctionArgumentFactory;
+import org.oss.evaluator.function.FunctionArgument;
+import org.oss.evaluator.function.impl.FunctionArgumentFactory;
 
 /**
  * Copyright [2015] [Open Software Solutions GmbH]

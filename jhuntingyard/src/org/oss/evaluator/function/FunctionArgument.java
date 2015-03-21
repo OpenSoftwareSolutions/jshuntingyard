@@ -1,7 +1,5 @@
-package org.oss.evaluator.funtion.impl;
+package org.oss.evaluator.function;
 
-import org.oss.evaluator.funtion.AbstractFunctionArgument;
-import org.oss.evaluator.funtion.FunctionArgument;
 
 /**
  * Copyright [2015] [Open Software Solutions GmbH]
@@ -14,18 +12,9 @@ import org.oss.evaluator.funtion.FunctionArgument;
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
-public class NullArgument extends AbstractFunctionArgument<Object>{
-
-	@Override
-	public FunctionArgument.ArgumentType getType() {
-		return FunctionArgument.ArgumentType.NULL;
-	}
-
-	@Override
-	public Object getValue() {
-		return null;
-	}
-
+public interface FunctionArgument<E> extends ExpressionElement {
+	enum ArgumentType {INTEGER, DOUBLE, LONG, BOOLEAN, STRING, NULL, OBJECT};
+	ArgumentType getType();
+	E getValue();
 }

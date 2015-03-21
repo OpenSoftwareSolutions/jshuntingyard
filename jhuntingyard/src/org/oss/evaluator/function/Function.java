@@ -1,7 +1,5 @@
-package org.oss.evaluator.funtion.impl;
+package org.oss.evaluator.function;
 
-import org.oss.evaluator.funtion.AbstractFunctionArgument;
-import org.oss.evaluator.funtion.FunctionArgument;
 
 /**
  * Copyright [2015] [Open Software Solutions GmbH]
@@ -16,23 +14,16 @@ import org.oss.evaluator.funtion.FunctionArgument;
  * limitations under the License.
  *
  */
-public class ObjectArgument extends AbstractFunctionArgument<Object>{
+public interface Function extends ExpressionElement {
+	public enum Associativity {LEFT,RIGHT};
+	public enum Precedence {ASSIGNMENT,LOGICAL_OR, LOGICAL_AND, EQULITY, RELATIONAL, ADDITIVE, MULTIPLICATIVE, POWER, UNARY, PARANTHESES, USERFUNCTION};
 
-	private final Object objectValue;
 
-	protected ObjectArgument(Object objectValue) {
-		super();
-		this.objectValue = objectValue;
-	}
 
-	@Override
-	public FunctionArgument.ArgumentType getType() {
-		return FunctionArgument.ArgumentType.OBJECT;
-	}
-
-	@Override
-	public Object getValue() {
-		return objectValue;
-	}
-
+	Associativity getAssociativity();
+	int getNumberOfParameters();
+	Precedence getPrecendence();
+	String getName();
+	boolean isUserFunction();
+	FunctionArgument<?> execute(FunctionArgument<?>... args) throws IllegalArgumentException;
 }
