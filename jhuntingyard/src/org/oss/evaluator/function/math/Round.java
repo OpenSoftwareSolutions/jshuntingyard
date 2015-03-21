@@ -1,9 +1,7 @@
 package org.oss.evaluator.function.math;
-import org.oss.evaluator.function.Function;
 import org.oss.evaluator.function.FunctionArgument;
-import org.oss.evaluator.function.impl.DoubleArgument;
 import org.oss.evaluator.function.impl.FunctionArgumentFactory;
-import org.oss.evaluator.operator.AbstractOperator;
+import org.oss.evaluator.operator.AbstractNumericOperatorAssociativityLeftOneArg;
 
 
 
@@ -22,26 +20,25 @@ import org.oss.evaluator.operator.AbstractOperator;
  * limitations under the License.
  *
  */
-public class Round extends AbstractOperator {
+public class Round extends AbstractNumericOperatorAssociativityLeftOneArg {
 
 	public Round() {
-		super("round", 1, Function.Associativity.LEFT, Precedence.USERFUNCTION);
+		super("round", Precedence.USERFUNCTION);
 	}
-
-
-	@Override
-	public FunctionArgument<?> execute(FunctionArgument<?>... args) throws IllegalArgumentException {
-		assertNumArgs(args);
-		if (isDouble(args)) {
-			DoubleArgument a = (DoubleArgument) args[0];
-			return FunctionArgumentFactory.createObject((int)Math.round(getDouble(a)));
-		}
-		throw new IllegalArgumentException(String.format("only double operator supported and not ", args[0].getType()));
-	}
-
 
 	@Override
 	public boolean isUserFunction() {
 		return true;
+	}
+
+
+	@Override
+	protected FunctionArgument<?> execute(FunctionArgument<?> a) throws IllegalArgumentException {
+
+		if (a.getType()==FunctionArgument.ArgumentType.DOUBLE) {
+			return FunctionArgumentFactory.createObject((int)Math.round(getDouble(a)));
+		}
+
+		throw new IllegalArgumentException(String.format("only double operator supported and not ", a.getType()));
 	}
 }

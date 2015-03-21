@@ -1,8 +1,8 @@
 package org.oss.evaluator.operator.primitive;
-import org.oss.evaluator.function.Function;
 import org.oss.evaluator.function.FunctionArgument;
 import org.oss.evaluator.function.impl.FunctionArgumentFactory;
 import org.oss.evaluator.function.impl.IntegerArgument;
+import org.oss.evaluator.operator.AbstractNumericOperatorAssociativityLeftTwoArg;
 
 
 
@@ -21,10 +21,10 @@ import org.oss.evaluator.function.impl.IntegerArgument;
  * limitations under the License.
  *
  */
-public class Power extends AbstractPrimitiveOperator {
+public class Power extends AbstractNumericOperatorAssociativityLeftTwoArg {
 
 	public Power() {
-		super("^", 2, Function.Associativity.RIGHT, Precedence.POWER);
+		super("^", Precedence.POWER);
 	}
 
 

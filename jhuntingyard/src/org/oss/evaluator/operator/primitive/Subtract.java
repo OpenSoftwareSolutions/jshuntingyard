@@ -1,8 +1,9 @@
 package org.oss.evaluator.operator.primitive;
-import org.oss.evaluator.function.Function;
+import org.oss.evaluator.function.Function.Precedence;
 import org.oss.evaluator.function.FunctionArgument;
 import org.oss.evaluator.function.impl.FunctionArgumentFactory;
 import org.oss.evaluator.function.impl.IntegerArgument;
+import org.oss.evaluator.operator.AbstractNumericOperatorAssociativityLeftTwoArg;
 
 
 
@@ -19,10 +20,10 @@ import org.oss.evaluator.function.impl.IntegerArgument;
  * limitations under the License.
  *
  */
-public class Subtract extends AbstractPrimitiveOperator {
+public class Subtract extends AbstractNumericOperatorAssociativityLeftTwoArg {
 
 	public Subtract() {
-		super("-", 2, Function.Associativity.LEFT, Precedence.ADDITIVE);
+		super("-", Precedence.ADDITIVE);
 	}
 
 

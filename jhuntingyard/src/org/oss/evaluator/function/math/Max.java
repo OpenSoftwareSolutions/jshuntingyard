@@ -1,9 +1,8 @@
 package org.oss.evaluator.function.math;
-import org.oss.evaluator.function.Function;
 import org.oss.evaluator.function.FunctionArgument;
 import org.oss.evaluator.function.impl.FunctionArgumentFactory;
 import org.oss.evaluator.function.impl.IntegerArgument;
-import org.oss.evaluator.operator.primitive.AbstractPrimitiveOperator;
+import org.oss.evaluator.operator.AbstractNumericOperatorAssociativityLeftTwoArg;
 
 
 
@@ -22,10 +21,10 @@ import org.oss.evaluator.operator.primitive.AbstractPrimitiveOperator;
  * limitations under the License.
  *
  */
-public class Max extends AbstractPrimitiveOperator {
+public class Max extends AbstractNumericOperatorAssociativityLeftTwoArg {
 
 	public Max() {
-		super("max", 2, Function.Associativity.LEFT, Precedence.USERFUNCTION);
+		super("max", Precedence.USERFUNCTION);
 	}
 
 

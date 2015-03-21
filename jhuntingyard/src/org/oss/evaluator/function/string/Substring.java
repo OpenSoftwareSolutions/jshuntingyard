@@ -2,7 +2,6 @@ package org.oss.evaluator.function.string;
 
 import org.oss.evaluator.function.FunctionArgument;
 import org.oss.evaluator.function.impl.FunctionArgumentFactory;
-import org.oss.evaluator.operator.AbstractOperator;
 
 /**
  * Copyright [2015] [Open Software Solutions GmbH]
@@ -17,10 +16,10 @@ import org.oss.evaluator.operator.AbstractOperator;
  * limitations under the License.
  *
  */
-public class Substring extends AbstractOperator {
+public class Substring extends AbstractStringOperatorAssociativityLeftThreeArg {
 
 	public Substring() {
-		super("substr", 3, Associativity.LEFT, Precedence.USERFUNCTION);
+		super("substr", Precedence.USERFUNCTION);
 
 	}
 
@@ -40,4 +39,11 @@ public class Substring extends AbstractOperator {
 		return FunctionArgumentFactory.createString(string.substring(begin, end));
 	}
 
+	@Override
+	protected FunctionArgument<?> execute(FunctionArgument<?> a,FunctionArgument<?> b, FunctionArgument<?> c) throws IllegalArgumentException {
+		String string = (String) a.getValue();
+		Integer begin = (Integer) b.getValue();
+		Integer end = (Integer) c.getValue();
+		return FunctionArgumentFactory.createString(string.substring(begin, end));
+	}
 }

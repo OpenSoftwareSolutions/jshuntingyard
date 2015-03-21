@@ -1,8 +1,7 @@
 package org.oss.evaluator.function.string;
-
 import org.oss.evaluator.function.FunctionArgument;
-import org.oss.evaluator.function.impl.FunctionArgumentFactory;
-import org.oss.evaluator.function.impl.StringArgument;
+
+
 
 /**
  * Copyright [2015] [Open Software Solutions GmbH]
@@ -17,28 +16,19 @@ import org.oss.evaluator.function.impl.StringArgument;
  * limitations under the License.
  *
  */
-public class StrLength extends AbstractStringOperatorAssociativityLeftOneArg {
+public abstract class AbstractStringOperatorAssociativityLeftThreeArg extends AbstractStringOperatorAssociativityLeft {
 
-	public StrLength() {
-		super("len", Precedence.USERFUNCTION);
+
+	public AbstractStringOperatorAssociativityLeftThreeArg(String name, Precedence precendence) {
+		super(name, 3, precendence);
 	}
-
 
 	@Override
-	public boolean isUserFunction() {
-		return true;
+	public FunctionArgument<?> execute(FunctionArgument<?>... args) throws IllegalArgumentException {
+		assertNumArgs(args);
+		return execute(args[0], args[1], args[2]);
 	}
 
-
-	@Override
-	protected FunctionArgument<?> execute(FunctionArgument<?> a)
-			throws IllegalArgumentException {
-
-		if (a.getType()==FunctionArgument.ArgumentType.STRING) {
-			String value = ((StringArgument)a).getValue();
-			return FunctionArgumentFactory.createObject(value.length());
-		}
-		throw new IllegalArgumentException(String.format("only string as type is supported and not ", a.getType()));
-	}
+	abstract protected FunctionArgument<?> execute(FunctionArgument<?> a, FunctionArgument<?> b, FunctionArgument<?> c) throws IllegalArgumentException;
 
 }

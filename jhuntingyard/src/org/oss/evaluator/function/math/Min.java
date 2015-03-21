@@ -1,9 +1,8 @@
 package org.oss.evaluator.function.math;
-import org.oss.evaluator.function.Function;
 import org.oss.evaluator.function.FunctionArgument;
 import org.oss.evaluator.function.impl.FunctionArgumentFactory;
 import org.oss.evaluator.function.impl.IntegerArgument;
-import org.oss.evaluator.operator.primitive.AbstractPrimitiveOperator;
+import org.oss.evaluator.operator.AbstractNumericOperatorAssociativityLeftTwoArg;
 
 
 
@@ -22,10 +21,10 @@ import org.oss.evaluator.operator.primitive.AbstractPrimitiveOperator;
  * limitations under the License.
  *
  */
-public class Min extends AbstractPrimitiveOperator {
+public class Min extends AbstractNumericOperatorAssociativityLeftTwoArg {
 
 	public Min() {
-		super("min", 2, Function.Associativity.LEFT, Precedence.USERFUNCTION);
+		super("min", Precedence.USERFUNCTION);
 	}
 
 

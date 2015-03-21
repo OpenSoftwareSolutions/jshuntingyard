@@ -66,24 +66,34 @@ public abstract class AbstractOperator implements Function {
 		return arg.getType()==FunctionArgument.ArgumentType.INTEGER ? ((FunctionArgument<Integer>)arg).getValue().doubleValue() : ((FunctionArgument<Double>)arg).getValue();
 	}
 
+
 	protected void assertNumArgs(FunctionArgument<?>... args) throws IllegalArgumentException {
 		if (args.length!=getNumberOfParameters()) {
 			throw new IllegalArgumentException(String.format("wrong numbers of arguments expexted %s actual %s", getNumberOfParameters(),args.length));
 		}
 	}
 
-	protected boolean isString(FunctionArgument<?>... args) throws IllegalArgumentException {
+	protected boolean isDouble(FunctionArgument<?>... args) throws IllegalArgumentException {
 		for (FunctionArgument<?> arg : args) {
-			if (!(arg.getType()==FunctionArgument.ArgumentType.STRING)) {
+			if (!(arg.getType()==FunctionArgument.ArgumentType.DOUBLE)) {
 				return false;
 			}
 		}
 		return true;
 	}
 
-	protected boolean isDouble(FunctionArgument<?>... args) throws IllegalArgumentException {
+	protected boolean isBoolean(FunctionArgument<?>... args) throws IllegalArgumentException {
 		for (FunctionArgument<?> arg : args) {
-			if (!(arg.getType()==FunctionArgument.ArgumentType.DOUBLE)) {
+			if (!(arg.getType()==FunctionArgument.ArgumentType.BOOLEAN)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	protected boolean isString(FunctionArgument<?>... args) throws IllegalArgumentException {
+		for (FunctionArgument<?> arg : args) {
+			if (!(arg.getType()==FunctionArgument.ArgumentType.STRING)) {
 				return false;
 			}
 		}
