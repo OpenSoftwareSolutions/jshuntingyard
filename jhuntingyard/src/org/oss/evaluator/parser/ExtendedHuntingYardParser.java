@@ -158,7 +158,6 @@ public class ExtendedHuntingYardParser {
 			// For all the input tokens [S1] read the next token [S2]
 			for (int tokenIndex = 0; tokenIndex<inputTokens.length;tokenIndex++) {
 				String token = inputTokens[tokenIndex];
-				System.out.println(token);
 				if (isOperator(token)) {
 					Function operator = operators.get(token);
 					if (operator.isUserFunction()) {

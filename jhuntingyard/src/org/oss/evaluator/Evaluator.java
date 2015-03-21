@@ -41,15 +41,11 @@ public class Evaluator {
 
 	public FunctionArgument<?> evaluate() {
 
-//		System.out.println("Input\tOperation\tStack after");
 		LinkedList<ExpressionElement> stack = new LinkedList<ExpressionElement>();
 		for (ExpressionElement element : expression) {
-//			System.out.print(element.getString()+"\t");
 			if (element instanceof FunctionArgument) {
-//				System.out.print("Push\t\t");
 				stack.push(element);
 			} else if (element instanceof Function) {
-//				System.out.print("Operate\t\t");
 				Function function = (Function) element;
 				int numArgs = function.getNumberOfParameters();
 				FunctionArgument<?> args[] = new FunctionArgument<?>[numArgs];
@@ -70,7 +66,6 @@ public class Evaluator {
 			} else {
 				throw new IllegalArgumentException("FunctionArgument or Function expected and not " + element.getClass().getName());
 			}
-//			System.out.println(stack);
 		}
 		if (stack.size()!=1) {
 			throw new IllegalArgumentException("Exact one final result expected and not " + stack.size());
