@@ -16,28 +16,26 @@ import org.oss.evaluator.function.FunctionArgument;
  * limitations under the License.
  *
  */
-public class StringTest {
+public class PrimitiveTest {
+
+
 	@Test
-	public void strlengthCompare() {
-		FunctionArgument<?> result = new Evaluator("len ( 'foo' ) < 4").evaluate();
-		AssertUtil.assertBooleanResult(result, true);
-	}
-	@Test
-	public void strlength() {
-		FunctionArgument<?> result = new Evaluator("len ( 'foo' )").evaluate();
-		AssertUtil.assertIntegerResult(result, 3);
+	public void basicOperatorsCalc() {
+		FunctionArgument<?> result = new Evaluator("( 1 + 2 ) * ( 3 / 4 ) ^ ( 5 + 6 )").evaluate();
+		AssertUtil.assertDoubleResult(result,0.12670540809631348);
 	}
 
 	@Test
-	public void booleanEvalLogicalAndTrue() {
-		FunctionArgument<?> result = new Evaluator("'foo' + '4' + 'bar'").evaluate();
-		AssertUtil.assertStringResult(result, "foo4bar");
+	public void basicOperatorsPrecedence() {
+		FunctionArgument<?> result = new Evaluator("1 + 2 * 3").evaluate();
+		AssertUtil.assertIntegerResult(result,7);
 	}
 
+
 	@Test
-	public void substring() {
-		FunctionArgument<?> result = new Evaluator("substr ( 'foo5bar' , 3 , 7 )").evaluate();
-		AssertUtil.assertStringResult(result, "5bar");
+	public void basicOperatorsModulo() {
+		FunctionArgument<?> result = new Evaluator("10 % 3").evaluate();
+		AssertUtil.assertIntegerResult(result,1);
 	}
 
 }
