@@ -2,15 +2,14 @@
 JHuntingYard Library Change Log
 ==============================================
 
-JHuntingYard 1.1.0Beta 				xx.xx.2015
+JHuntingYard 1.1.0 					22.03.2015
 ----------------------------------------------
 
-Bugfixes
--
-
-
 Features
--
+- complete list of String functions
+- complete list of Math functions
+- documentation on classes
+- bigger re-factoring on the internal software design
 
 ==============================================
 
