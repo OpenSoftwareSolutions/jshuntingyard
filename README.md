@@ -5,9 +5,9 @@ JSHuntingYard is the advanced library for adding high-performance, mathematical,
 [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0)
 
 #Features
-   * Parses and evaluates dynamic and static expressions at run time.
+   * Parses and evaluates dynamic and static expressions at runtime.
    * Supports mathematical, Object, Boolean, String and functional expressions.
-   * All major mathematical and Boolean operators can be integrated.
+   * All major mathematical and Boolean operators are integrated.
    * Supports custom functions.
    * Is extendable.
    * Math and String functions built in and ready to use.
