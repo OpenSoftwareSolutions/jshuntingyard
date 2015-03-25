@@ -11,33 +11,43 @@
  * limitations under the License.
  *
  */
-package org.oss.evaluator.function.string;
+package org.oss.evaluator.operator.date;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.oss.evaluator.function.FunctionArgument;
 import org.oss.evaluator.function.impl.FunctionArgumentFactory;
 import org.oss.evaluator.function.impl.StringArgument;
 import org.oss.evaluator.operator.AbstractStringOperatorAssociativityLeftOneArg;
 
-public class Length extends AbstractStringOperatorAssociativityLeftOneArg {
+/**
+ *returns a formatted "today".
+ */
+public class CurrentDate extends AbstractStringOperatorAssociativityLeftOneArg {
 
-	public Length() {
-		super("len", Precedence.USERFUNCTION);
+	public CurrentDate() {
+		super("currentDate", Precedence.USERFUNCTION);
 	}
 
 
 	@Override
 	public boolean isUserFunction() {
-		return true;
+		return false;
 	}
 
 
+	/*
+	 * @see org.oss.evaluator.function.string.AbstractStringOperatorAssociativityLeftOneArg#execute(org.oss.evaluator.function.FunctionArgument)
+	 */
 	@Override
 	protected FunctionArgument<?> execute(FunctionArgument<?> a)
 			throws IllegalArgumentException {
 
 		if (a.getType()==FunctionArgument.ArgumentType.STRING) {
-			String value = ((StringArgument)a).getValue();
-			return FunctionArgumentFactory.createObject(value.length());
+			String format = ((StringArgument)a).getValue();
+			SimpleDateFormat sdf = new SimpleDateFormat(format);
+			return FunctionArgumentFactory.createString(sdf.format(new Date()));
 		}
 
 		throw new IllegalArgumentException(String.format("only string as type is supported and not ", a.getType()));

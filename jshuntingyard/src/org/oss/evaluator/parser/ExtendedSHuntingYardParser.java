@@ -55,11 +55,22 @@ import org.oss.evaluator.function.string.EqualsIgnoreCase;
 import org.oss.evaluator.function.string.IndexOf;
 import org.oss.evaluator.function.string.LastIndexOf;
 import org.oss.evaluator.function.string.Length;
+import org.oss.evaluator.function.string.Like;
+import org.oss.evaluator.function.string.Matches;
+import org.oss.evaluator.function.string.NumberFormat;
 import org.oss.evaluator.function.string.Replace;
 import org.oss.evaluator.function.string.StartsWith;
 import org.oss.evaluator.function.string.Substring;
 import org.oss.evaluator.function.string.ToLowerCase;
 import org.oss.evaluator.function.string.ToUpperCase;
+import org.oss.evaluator.operator.conditional.IfElse;
+import org.oss.evaluator.operator.converter.BooleanStringConverter;
+import org.oss.evaluator.operator.converter.DateStringConverter;
+import org.oss.evaluator.operator.converter.DoubleStringConverter;
+import org.oss.evaluator.operator.converter.IntegerStringConverter;
+import org.oss.evaluator.operator.date.Now;
+import org.oss.evaluator.operator.date.CurrentDate;
+import org.oss.evaluator.operator.date.TruncateDateTo;
 import org.oss.evaluator.operator.logic.AndOperator;
 import org.oss.evaluator.operator.logic.NotOperator;
 import org.oss.evaluator.operator.logic.OrOperator;
@@ -153,6 +164,21 @@ public class ExtendedSHuntingYardParser {
 		addFunction(new ToLowerCase());
 		addFunction(new IndexOf());
 		addFunction(new LastIndexOf());
+		addFunction(new Like());
+		addFunction(new Matches());
+		addFunction(new NumberFormat());
+		// Date
+		addFunction(new CurrentDate());
+		addFunction(new Now());
+		addFunction(new TruncateDateTo());
+		// converter
+		addFunction(new BooleanStringConverter());
+		addFunction(new DateStringConverter());
+		addFunction(new DoubleStringConverter());
+		addFunction(new IntegerStringConverter());
+		// Conditional
+		addFunction(new IfElse());
+
 	}
 
 	/**

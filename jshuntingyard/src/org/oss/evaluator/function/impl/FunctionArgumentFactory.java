@@ -76,4 +76,8 @@ public class FunctionArgumentFactory {
 	  return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
 	}
 
+	public static FunctionArgument<Double> createDouble(String value) {
+		return value.indexOf(",") > 0 ? new DoubleArgument(new Double(value.replace('.', ','))) : new DoubleArgument(new Double(value));
+	}
+
 }

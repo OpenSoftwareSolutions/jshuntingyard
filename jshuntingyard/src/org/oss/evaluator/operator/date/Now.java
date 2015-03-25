@@ -11,36 +11,35 @@
  * limitations under the License.
  *
  */
-package org.oss.evaluator.function.string;
+package org.oss.evaluator.operator.date;
+
+import java.util.Date;
 
 import org.oss.evaluator.function.FunctionArgument;
 import org.oss.evaluator.function.impl.FunctionArgumentFactory;
-import org.oss.evaluator.function.impl.StringArgument;
-import org.oss.evaluator.operator.AbstractStringOperatorAssociativityLeftOneArg;
+import org.oss.evaluator.function.string.AbstractStringOperatorAssociativityLeftNoArg;
 
-public class Length extends AbstractStringOperatorAssociativityLeftOneArg {
+/**
+ *returns a formatted "today".
+ */
+public class Now extends AbstractStringOperatorAssociativityLeftNoArg {
 
-	public Length() {
-		super("len", Precedence.USERFUNCTION);
+	public Now() {
+		super("now", Precedence.USERFUNCTION);
 	}
 
 
 	@Override
 	public boolean isUserFunction() {
-		return true;
+		return false;
 	}
 
 
+	/*
+	 * @see org.oss.evaluator.function.string.AbstractStringOperatorAssociativityLeftOneArg#execute(org.oss.evaluator.function.FunctionArgument)
+	 */
 	@Override
-	protected FunctionArgument<?> execute(FunctionArgument<?> a)
-			throws IllegalArgumentException {
-
-		if (a.getType()==FunctionArgument.ArgumentType.STRING) {
-			String value = ((StringArgument)a).getValue();
-			return FunctionArgumentFactory.createObject(value.length());
-		}
-
-		throw new IllegalArgumentException(String.format("only string as type is supported and not ", a.getType()));
+	protected FunctionArgument<?> execute() throws IllegalArgumentException {
+		return FunctionArgumentFactory.createString("" + new Date().getTime());
 	}
-
 }

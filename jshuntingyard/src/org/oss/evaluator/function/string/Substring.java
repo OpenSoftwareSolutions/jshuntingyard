@@ -15,6 +15,7 @@ package org.oss.evaluator.function.string;
 
 import org.oss.evaluator.function.FunctionArgument;
 import org.oss.evaluator.function.impl.FunctionArgumentFactory;
+import org.oss.evaluator.operator.AbstractStringOperatorAssociativityLeftThreeArg;
 
 public class Substring extends AbstractStringOperatorAssociativityLeftThreeArg {
 

@@ -16,6 +16,7 @@ package org.oss.evaluator.function.string;
 import org.oss.evaluator.function.FunctionArgument;
 import org.oss.evaluator.function.impl.FunctionArgumentFactory;
 import org.oss.evaluator.function.impl.StringArgument;
+import org.oss.evaluator.operator.AbstractStringOperatorAssociativityLeftOneArg;
 
 /**
  * The java.lang.String.toUpperCase() method converts all of the characters in this String to upper case using the rules of the default locale.
