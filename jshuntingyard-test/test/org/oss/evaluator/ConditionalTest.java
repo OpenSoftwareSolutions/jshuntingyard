@@ -11,22 +11,23 @@
  * limitations under the License.
  *
  */
-package org.oss.evaluator.function.string;
+package org.oss.evaluator;
+
+import org.junit.Test;
 import org.oss.evaluator.function.FunctionArgument;
 
-public abstract class AbstractStringOperatorAssociativityLeftOneArg extends AbstractOperatorAssociativityLeft {
+public class ConditionalTest {
 
-
-	public AbstractStringOperatorAssociativityLeftOneArg(String name, Precedence precendence) {
-		super(name, 1, precendence);
+	@Test
+	public void conditionalYes() {
+		FunctionArgument<?> result = new Evaluator("ifelse ( '1.0' , 'YES' , 'NO' ) ").evaluate();
+		AssertUtil.assertStringResult(result, "YES");
 	}
 
-	@Override
-	public FunctionArgument<?> execute(FunctionArgument<?>... args) throws IllegalArgumentException {
-		assertNumArgs(args);
-		return execute(args[0]);
+	@Test
+	public void conditionalNo() {
+		FunctionArgument<?> result = new Evaluator("ifelse ( '0.0' , 'YES' , 'NO' ) ").evaluate();
+		AssertUtil.assertStringResult(result, "NO");
 	}
-
-	abstract protected FunctionArgument<?> execute(FunctionArgument<?> a) throws IllegalArgumentException;
 
 }

@@ -178,5 +178,40 @@ public class StringTest {
 		AssertUtil.assertIntegerResult(result, 8);
 	}
 
+	@Test
+	public void likeTrue1() {
+		FunctionArgument<?> result = new Evaluator("like ( 'Hello' , 'he%' )").evaluate();
+		AssertUtil.assertBooleanResult(result, Boolean.TRUE);
+	}
+
+	@Test
+	public void likeTrue2() {
+		FunctionArgument<?> result = new Evaluator("like ( 'Hello' , '%Hel%' )").evaluate();
+		AssertUtil.assertBooleanResult(result, Boolean.TRUE);
+	}
+
+	@Test
+	public void likeFalse() {
+		FunctionArgument<?> result = new Evaluator("like ( 'Hello' , '%bye%' )").evaluate();
+		AssertUtil.assertBooleanResult(result, Boolean.FALSE);
+	}
+
+	@Test
+	public void matchesTrue() {
+		FunctionArgument<?> result = new Evaluator("matches ( '7:05' , '.*?\\d+?:\\d+?' )").evaluate();
+		AssertUtil.assertBooleanResult(result, Boolean.TRUE);
+	}
+
+	@Test
+	public void matchesFalse() {
+		FunctionArgument<?> result = new Evaluator("matches ( '7.05' , '.*?\\d+?:\\d+?' )").evaluate();
+		AssertUtil.assertBooleanResult(result, Boolean.FALSE);
+	}
+
+	@Test
+	public void numberFormat() {
+		FunctionArgument<?> result = new Evaluator("numberFormat ( '%f' , 3.141592653589793 )").evaluate();
+		AssertUtil.assertStringResult(result, "3,141593");
+	}
 
 }

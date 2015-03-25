@@ -2,7 +2,37 @@
 JHuntingYard Library Change Log
 ==============================================
 
-JHuntingYard 1.1.0 					22.03.2015
+JHuntingYard 1.1.0 					24.03.2015
+----------------------------------------------
+
+Features
+
+String Functions
+- Like
+- Matches
+- NumberFormat
+
+Converter Funtions
+- BooleanConverter
+- DateStringConverter
+- DoubleStringConverter
+- IntegerStringConverter
+
+Date Functions
+- CurrentDate
+- Now
+- TruncateDateTo
+
+Conditional Function
+- ifelse
+
+Known Bugs
+- TruncateDateTo (see DateTest)
+- DateStringConverter (see ConverterTest)
+
+==============================================
+
+JHuntingYard 1.0.0 					22.03.2015
 ----------------------------------------------
 
 Features
