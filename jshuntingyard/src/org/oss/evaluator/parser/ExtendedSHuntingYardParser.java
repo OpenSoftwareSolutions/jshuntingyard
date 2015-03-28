@@ -241,28 +241,17 @@ public class ExtendedSHuntingYardParser {
 
 
 	/**
-	 * TODO instead of split() use a tokenizer (ExpressionTokenizer)
 	 * @param expression
 	 * @return List<ExpressionElement>
 	 */
 	public List<ExpressionElement> infixToRPN(String expression) {
 
-		//List<String> result = new ArrayList<String>();
-		//ExpressionTokenizer expressionTokenizer = new ExpressionTokenizer(expression, ExpressionTokenizer.COMMA);
-		//while(expressionTokenizer.hasMoreElements()){
-			//result.add(expressionTokenizer.nextToken());
-		//}
-		//String[] expressions = new String[result.size()];
-		//expressions = result.toArray(expressions);
+		String[] tokens = ParserUtil.modifyExpression(expression).split(ParserUtil.DELIMITER);
 
-		//
-		String regex = "\\s";
-		String[] split = expression.split(regex);
-
-		return infixToRPN(split);
+		return infixToRPN(tokens);
 	}
 
-	private List<ExpressionElement> infixToRPN(String[] inputTokens) {
+	public List<ExpressionElement> infixToRPN(String[] inputTokens) {
 		ArrayList<ExpressionElement> out = new ArrayList<ExpressionElement>();
 		Stack<ExpressionElement> stack = new Stack<ExpressionElement>();
 			// For all the input tokens [S1] read the next token [S2]

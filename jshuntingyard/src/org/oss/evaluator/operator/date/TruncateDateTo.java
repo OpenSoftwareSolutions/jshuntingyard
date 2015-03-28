@@ -51,10 +51,10 @@ public class TruncateDateTo extends AbstractStringOperatorAssociativityLeftTwoAr
 			String mode = (String) a.getValue();
 			String strDate = (String) b.getValue();
 
-			DateFormat f = DateFormat.getInstance();
-			Date d = null;
+		    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		    Date d = null;
 			try {
-				 d = f.parse(strDate);
+				d = dateFormat.parse(strDate);
 			} catch (ParseException e) {
 				throw new IllegalArgumentException(e);
 			}

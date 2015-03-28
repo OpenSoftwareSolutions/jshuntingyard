@@ -41,8 +41,7 @@ public class CurrentDate extends AbstractStringOperatorAssociativityLeftOneArg {
 	 * @see org.oss.evaluator.function.string.AbstractStringOperatorAssociativityLeftOneArg#execute(org.oss.evaluator.function.FunctionArgument)
 	 */
 	@Override
-	protected FunctionArgument<?> execute(FunctionArgument<?> a)
-			throws IllegalArgumentException {
+	protected FunctionArgument<?> execute(FunctionArgument<?> a) throws IllegalArgumentException {
 
 		if (a.getType()==FunctionArgument.ArgumentType.STRING) {
 			String format = ((StringArgument)a).getValue();

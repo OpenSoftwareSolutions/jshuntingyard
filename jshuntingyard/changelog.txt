@@ -2,6 +2,19 @@
 JHuntingYard Library Change Log
 ==============================================
 
+JHuntingYard 1.1.1 					28.03.2015
+----------------------------------------------
+Features
+- Single Quote handling in Parser
+
+Bug
+- whitespaces inside single quoted strings
+- date handling on truncateDateTo
+
+Known Bugs
+- DateStringConverter (see ConverterTest)
+==============================================
+
 JHuntingYard 1.1.0 					24.03.2015
 ----------------------------------------------
 

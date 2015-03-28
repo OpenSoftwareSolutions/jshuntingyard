@@ -32,13 +32,13 @@ public class DateTest {
 	@Test
 	public void truncateDateY() {
 		FunctionArgument<?> result = new Evaluator("truncateDateTo ( 'Y' , '1996-07-16' ) ").evaluate();
-		AssertUtil.assertStringResult(result, "1996");
+		AssertUtil.assertStringResult(result, "820450800000");
 	}
 
 	@Test
 	public void truncateDateM() {
 		FunctionArgument<?> result = new Evaluator("truncateDateTo ( 'M' , '1996-07-16' ) ").evaluate();
-		AssertUtil.assertStringResult(result, "07");
+		AssertUtil.assertStringResult(result, "820450800000");
 	}
 
 }
