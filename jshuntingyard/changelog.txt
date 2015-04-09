@@ -2,6 +2,20 @@
 JHuntingYard Library Change Log
 ==============================================
 
+JHuntingYard 1.2.0 					09.04.2015
+----------------------------------------------
+Features
+Signatures on the Evaluator and
+the ExtendedSHuntingYardParser has been extended.
+
+Bug
+
+Known Bugs
+- DateStringConverter (see ConverterTest)
+
+JHuntingYard Library Change Log
+==============================================
+
 JHuntingYard 1.1.1 					28.03.2015
 ----------------------------------------------
 Features
