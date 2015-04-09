@@ -34,12 +34,17 @@ public class Evaluator {
 		this.expression = new ExtendedSHuntingYardParser().infixToRPN(evalExpression);
 	}
 
+	public Evaluator(){
+		this.variables = new HashMap<String,Variable>();
+		this.expression = null;
+	}
+
 	public void bindVariable(Variable variable) {
 		variables.put(variable.getName(), variable);
 	}
 
 
-	public FunctionArgument<?> evaluate() {
+	public FunctionArgument<?> evaluate(List<ExpressionElement> expression) {
 
 		LinkedList<ExpressionElement> stack = new LinkedList<ExpressionElement>();
 		for (ExpressionElement element : expression) {
@@ -76,5 +81,12 @@ public class Evaluator {
 		} else {
 			throw new IllegalArgumentException("FunctionArgument expected and not " + element.getClass().getName());
 		}
+	}
+
+	public FunctionArgument<?> evaluate() {
+		if(expression == null || expression.isEmpty()){
+			throw new RuntimeException("There are no ExpressionElements in the List");
+		}
+		return evaluate(expression);
 	}
 }

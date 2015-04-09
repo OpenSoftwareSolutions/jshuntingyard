@@ -20,7 +20,7 @@ public class StringArgument extends AbstractFunctionArgument<String> implements 
 
 	private final String stringValue;
 
-	StringArgument(String stringValue) {
+	public StringArgument(String stringValue) {
 		this.stringValue = stringValue;
 	}
 

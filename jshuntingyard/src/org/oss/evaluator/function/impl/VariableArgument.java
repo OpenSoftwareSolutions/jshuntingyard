@@ -21,7 +21,7 @@ public class VariableArgument implements FunctionArgument {
 	private final String variableName;
 	private Object value;
 
-	VariableArgument(String variableName) {
+	public VariableArgument(String variableName) {
 		super();
 		this.variableName = variableName;
 	}
