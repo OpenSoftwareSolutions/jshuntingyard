@@ -14,7 +14,7 @@ import org.oss.evaluator.function.FunctionArgument;
 import org.oss.evaluator.function.impl.DoubleArgument;
 import org.oss.evaluator.parser.ExtendedSHuntingYardParser;
 
-public class SpeedTest {
+public class PerformanceTest {
 
 	@Test
 	public void evaluatingSpeedJEval() throws EvaluationException {

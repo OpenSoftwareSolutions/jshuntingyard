@@ -86,6 +86,8 @@ import org.oss.evaluator.operator.relational.GreaterThanOrEqualTo;
 import org.oss.evaluator.operator.relational.LessThan;
 import org.oss.evaluator.operator.relational.LessThanOrEqualTo;
 import org.oss.evaluator.operator.relational.NotEqualTo;
+import org.oss.evaluator.tokenizer.ExpressionToken;
+import org.oss.evaluator.tokenizer.ExpressionTokenizer;
 
 /**
  * Shunting-yard algorithm
@@ -246,9 +248,9 @@ public class ExtendedSHuntingYardParser {
 	 */
 	public List<ExpressionElement> infixToRPN(String expression) {
 
-		String[] tokens = ParserUtil.modifyExpression(expression).split(ParserUtil.DELIMITER);
-
-		return infixToRPN(tokens);
+		//String[] tokens = TokenizerUtil.modifyExpression(expression).split(TokenizerUtil.DELIMITER);
+		List<ExpressionToken> tokens = ExpressionTokenizer.tokenize(expression);
+		return infixToRPN(ExpressionTokenizer.getTokenAsStringArray(tokens));
 	}
 
 	public List<ExpressionElement> infixToRPN(String[] inputTokens) {
