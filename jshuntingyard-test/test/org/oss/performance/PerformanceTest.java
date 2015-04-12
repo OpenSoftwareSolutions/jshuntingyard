@@ -24,7 +24,7 @@ public class PerformanceTest {
 		for (int i=0;i<10000;i++){
 			assertEquals("0.12670540809631348", evaluator.evaluate());
 		}
-		System.out.println("JEval Time elapsed within " + (System.currentTimeMillis() -t) + " ms");
+		System.out.println("JEval with parsing and evaluation together, time elapsed within " + (System.currentTimeMillis() -t) + " ms");
 	}
 	@Test
 	public void evaluatingWithParsingSpeedJEval() throws EvaluationException {
@@ -33,7 +33,7 @@ public class PerformanceTest {
 		for (int i=0;i<10000;i++){
 			assertEquals("0.12670540809631348", evaluator.evaluate("( 1 + 2 ) * pow(( 3 / 4 ) , ( 5 + 6 ))"));
 		}
-		System.out.println("JEval with pre-parsing parsing Time elapsed within " + (System.currentTimeMillis() -t) + " ms");
+		System.out.println("JEval with parsing separated from evaluation, time elapsed within " + (System.currentTimeMillis() -t) + " ms");
 	}
 
 	@Test
@@ -45,7 +45,7 @@ public class PerformanceTest {
 			FunctionArgument<?> result = new Evaluator().evaluate(elements);
 			assertDoubleResult(result,0.12670540809631348);
 		}
-		System.out.println("JShuntingYard with pre-parsing elapsed within "+ (System.currentTimeMillis() -t) + " ms");
+		System.out.println("JSHuntingYard with parsing separated from evaluation, time elapsed within "+ (System.currentTimeMillis() -t) + " ms");
 	}
 	@Test
 	public void evaluatingWithParsingSpeed() {
@@ -56,7 +56,7 @@ public class PerformanceTest {
 			FunctionArgument<?> result = new Evaluator().evaluate(elements);
 			assertDoubleResult(result,0.12670540809631348);
 		}
-		System.out.println("JShuntingYard with parsing elapsed within " + (System.currentTimeMillis() -t) + " ms");
+		System.out.println("JSHuntingYard with parsing and evaluation together, time elapsed within " + (System.currentTimeMillis() -t) + " ms");
 	}
 	@Test
 	public void nativSpeed() {
@@ -65,7 +65,7 @@ public class PerformanceTest {
 			FunctionArgument<?> result = new DoubleArgument((double)(( 1 + 2 ) * Math.pow(( 3.0 / 4 ) , ( 5 + 6 ))));
 			assertDoubleResult(result,0.12670540809631348);
 		}
-		System.out.println("Compiled JSHuntingYard Expression elapsed within " + (System.currentTimeMillis() -t) + " ms");
+		System.out.println("Compiled JSHuntingYard Expression, time elapsed within " + (System.currentTimeMillis() -t) + " ms");
 	}
 
 	private void assertDoubleResult(FunctionArgument<?> result, Double expected) {
