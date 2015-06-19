@@ -48,6 +48,36 @@ public class VariableTest {
 		AssertUtil.assertDoubleResult(result,22.89);
 	}
 
+	@Test
+	public void variablesWithUnderscore() {
+		Evaluator evaluator = new Evaluator("max ( $WITH_ , $2 )");
+		MyVar var1 = new MyVar();
+		var1.name = "WITH_";
+		var1.value = 2.3456;
+		MyVar var2 = new MyVar();
+		var2.name = "2";
+		var2.value=22.89;
+		evaluator.bindVariable(var2);
+		evaluator.bindVariable(var1);
+		FunctionArgument<?> result = evaluator.evaluate();
+		AssertUtil.assertDoubleResult(result,22.89);
+	}
+
+	@Test
+	public void variablesWithUnderscoreAndLetters() {
+		Evaluator evaluator = new Evaluator("max ( $WITH_ME , $2 )");
+		MyVar var1 = new MyVar();
+		var1.name = "WITH_ME";
+		var1.value = 2.3456;
+		MyVar var2 = new MyVar();
+		var2.name = "2";
+		var2.value=22.89;
+		evaluator.bindVariable(var2);
+		evaluator.bindVariable(var1);
+		FunctionArgument<?> result = evaluator.evaluate();
+		AssertUtil.assertDoubleResult(result,22.89);
+	}
+
 	private static class MyVar implements Variable {
 
 		String name;
