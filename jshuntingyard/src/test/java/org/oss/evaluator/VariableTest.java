@@ -15,7 +15,6 @@ package org.oss.evaluator;
 
 import org.junit.Test;
 import org.oss.evaluator.function.FunctionArgument;
-import org.oss.evaluator.function.impl.StringArgument;
 
 public class VariableTest {
 
