@@ -20,7 +20,32 @@ JSHuntingYard is the advanced library for adding high-performance, mathematical,
    * Compatible with J2SE 1.5 and above.
 
 #Download the Lib
-You either check out the project and build your version with ANT or you can get the latest lib from our [mvn-repo](https://github.com/OpenSoftwareSolutions/mvn-repo)
+Get the latest version from our [mvn-repo](https://github.com/OpenSoftwareSolutions/mvn-repo)
+
+## Using in Maven
+
+    <dependency>
+        <groupId>org.oss.evaluator</groupId>
+        <artifactId>evaluator-jshuntingyard</artifactId>
+        <version>1.4.0</version>
+    </dependency>
+
+## add our Repository to your pom.xml
+
+    <repository>
+            <id>OpenSoftwareSolutionsMvn</id>
+            <name>JSHuntingYard Repo</name>
+            <url>"https://github.com/OpenSoftwareSolutions/mvn-repo/raw/master/repository/"</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+            </releases>
+    </repository>
+
 
 #Official Webpage
 [Official Webpage](https://www.open-software-solutions.ch)
