@@ -20,7 +20,7 @@ public class DoubleArgument extends AbstractFunctionArgument<Double> implements 
 
 	private final Double doubleValue;
 
-	public DoubleArgument(Double doubleValue) {
+	DoubleArgument(Double doubleValue) {
 		this.doubleValue = doubleValue;
 	}
 

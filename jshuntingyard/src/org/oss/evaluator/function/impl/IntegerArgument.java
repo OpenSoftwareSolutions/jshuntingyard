@@ -20,7 +20,7 @@ public class IntegerArgument extends AbstractFunctionArgument<Integer> implement
 
 	private final Integer intValue;
 
-	public IntegerArgument(Integer intValue) {
+	IntegerArgument(Integer intValue) {
 		this.intValue = intValue;
 	}
 
