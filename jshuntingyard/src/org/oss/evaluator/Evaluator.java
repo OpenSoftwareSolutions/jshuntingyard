@@ -21,26 +21,28 @@ import java.util.Map;
 import org.oss.evaluator.function.ExpressionElement;
 import org.oss.evaluator.function.Function;
 import org.oss.evaluator.function.FunctionArgument;
+import org.oss.evaluator.function.impl.FunctionArgumentFactory;
+import org.oss.evaluator.function.impl.NullArgument;
 import org.oss.evaluator.function.impl.VariableArgument;
 import org.oss.evaluator.parser.ExtendedSHuntingYardParser;
 
 public class Evaluator {
 
-	private final Map<String,Variable> variables;
+	private final Map<String,Variable> boundVariables;
 	private final List<ExpressionElement> expression;
 
 	public Evaluator(String evalExpression){
-		this.variables = new HashMap<String,Variable>();
+		this.boundVariables = new HashMap<String,Variable>();
 		this.expression = new ExtendedSHuntingYardParser().infixToRPN(evalExpression);
 	}
 
 	public Evaluator(){
-		this.variables = new HashMap<String,Variable>();
+		this.boundVariables = new HashMap<String,Variable>();
 		this.expression = null;
 	}
 
 	public void bindVariable(Variable variable) {
-		variables.put(variable.getName(), variable);
+		boundVariables.put(variable.getName(), variable);
 	}
 
 
@@ -60,8 +62,8 @@ public class Evaluator {
 						args[numArgs -1 - i] = (FunctionArgument<?>) arg;
 						if (arg instanceof VariableArgument) {
 							VariableArgument variable = (VariableArgument) arg;
-							Variable value = variables.get(variable.getName());
-							variable.setValue(value.getValue());
+							Variable boundVariable = boundVariables.get(variable.getName());
+							args[numArgs -1 - i] = replaceVariable(boundVariable.getValue());
 						}
 					} else {
 						throw new IllegalArgumentException("FunctionArgument expected and not " + arg.getClass().getName());
@@ -81,6 +83,25 @@ public class Evaluator {
 		} else {
 			throw new IllegalArgumentException("FunctionArgument expected and not " + element.getClass().getName());
 		}
+	}
+
+	private FunctionArgument<?> replaceVariable(Object value) {
+		if (value instanceof Integer) {
+			return FunctionArgumentFactory.createObject((Integer) value);
+		}
+		if (value instanceof Double) {
+			return FunctionArgumentFactory.createObject((Double) value);
+		}
+		if (value instanceof String) {
+			return FunctionArgumentFactory.createString((String) value);
+		}
+		if (value instanceof Boolean) {
+			return FunctionArgumentFactory.createObject((Boolean) value);
+		}
+		if (value instanceof Object) {
+			return FunctionArgumentFactory.createObject(value);
+		}
+		return new NullArgument();
 	}
 
 	public FunctionArgument<?> evaluate() {

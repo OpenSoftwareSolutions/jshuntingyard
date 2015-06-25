@@ -15,6 +15,7 @@ package org.oss.evaluator;
 
 import org.junit.Test;
 import org.oss.evaluator.function.FunctionArgument;
+import org.oss.evaluator.function.impl.StringArgument;
 
 public class VariableTest {
 
@@ -77,11 +78,31 @@ public class VariableTest {
 		FunctionArgument<?> result = evaluator.evaluate();
 		AssertUtil.assertDoubleResult(result,22.89);
 	}
+	@Test
+	public void variablesConcatenating() {
+		Evaluator evaluator = new Evaluator("'hallo ' + $1");
+		MyVar var1 = new MyVar();
+		var1.name = "1";
+		var1.value = "welt";
+		evaluator.bindVariable(var1);
+		FunctionArgument<?> result = evaluator.evaluate();
+		AssertUtil.assertStringResult(result,"hallo welt");
+	}
+	@Test
+	public void variablesAdd() {
+		Evaluator evaluator = new Evaluator("2 + $1");
+		MyVar var1 = new MyVar();
+		var1.name = "1";
+		var1.value = 1;
+		evaluator.bindVariable(var1);
+		FunctionArgument<?> result = evaluator.evaluate();
+		AssertUtil.assertIntegerResult(result,3);
+	}
 
 	private static class MyVar implements Variable {
 
 		String name;
-		Double value;
+		Object value;
 		@Override
 		public String getName() {
 			return name;

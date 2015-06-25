@@ -12,6 +12,7 @@ import org.oss.evaluator.Evaluator;
 import org.oss.evaluator.function.ExpressionElement;
 import org.oss.evaluator.function.FunctionArgument;
 import org.oss.evaluator.function.impl.DoubleArgument;
+import org.oss.evaluator.function.impl.FunctionArgumentFactory;
 import org.oss.evaluator.parser.ExtendedSHuntingYardParser;
 
 public class PerformanceTest {
@@ -62,7 +63,7 @@ public class PerformanceTest {
 	public void nativSpeed() {
 		long t = System.currentTimeMillis();
 		for (int i=0;i<10000;i++){
-			FunctionArgument<?> result = new DoubleArgument((double)(( 1 + 2 ) * Math.pow(( 3.0 / 4 ) , ( 5 + 6 ))));
+			FunctionArgument<?> result = FunctionArgumentFactory.createObject((double)(( 1 + 2 ) * Math.pow(( 3.0 / 4 ) , ( 5 + 6 ))));
 			assertDoubleResult(result,0.12670540809631348);
 		}
 		System.out.println("Compiled JSHuntingYard Expression, time elapsed within " + (System.currentTimeMillis() -t) + " ms");
