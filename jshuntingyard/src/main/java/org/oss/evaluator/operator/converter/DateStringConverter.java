@@ -11,14 +11,14 @@
 package org.oss.evaluator.operator.converter;
 
 import org.oss.evaluator.function.FunctionArgument;
+import org.oss.evaluator.function.impl.DoubleArgument;
 import org.oss.evaluator.function.impl.FunctionArgumentFactory;
-import org.oss.evaluator.operator.AbstractStringOperatorAssociativityLeftOneArg;
 
 /**
  * Date to String
  *
  */
-public class DateStringConverter extends AbstractStringOperatorAssociativityLeftOneArg {
+public class DateStringConverter extends AbstractDouble2StringConverterOperatorAssociativityLeftOneArg {
 
 	/**
 	 *
@@ -37,10 +37,10 @@ public class DateStringConverter extends AbstractStringOperatorAssociativityLeft
 	 * @see org.oss.evaluator.function.string.AbstractStringOperatorAssociativityLeftOneArg#execute(org.oss.evaluator.function.FunctionArgument)
 	 */
 	@Override
-	protected FunctionArgument<?> execute(FunctionArgument<?> a) throws IllegalArgumentException {
-		if(a.getType()==FunctionArgument.ArgumentType.STRING){
-			Long number = FunctionArgumentFactory.createDouble((String)a.getValue()).getValue().longValue();
-			return FunctionArgumentFactory.createString("(date)" + number.toString());
+	protected FunctionArgument<?> execute(FunctionArgument<Double> a) throws IllegalArgumentException {
+
+		if(a instanceof DoubleArgument){
+			return FunctionArgumentFactory.createString("(date)" + ((DoubleArgument)a).getValue().toString());
 		}
 		throw new IllegalArgumentException(String.format("only string as type is supported and not ", a.getType()));
 	}

@@ -12,13 +12,13 @@ package org.oss.evaluator.operator.converter;
 
 import org.oss.evaluator.function.FunctionArgument;
 import org.oss.evaluator.function.impl.FunctionArgumentFactory;
-import org.oss.evaluator.operator.AbstractStringOperatorAssociativityLeftOneArg;
+import org.oss.evaluator.function.impl.IntegerArgument;
 
 /**
  *Integer to String
  *
  */
-public class IntegerStringConverter extends AbstractStringOperatorAssociativityLeftOneArg {
+public class IntegerStringConverter extends AbstractInt2StringConverterOperatorAssociativityLeftOneArg {
 
 	/**
 	 *
@@ -37,10 +37,10 @@ public class IntegerStringConverter extends AbstractStringOperatorAssociativityL
 	 * @see org.oss.evaluator.function.string.AbstractStringOperatorAssociativityLeftOneArg#execute(org.oss.evaluator.function.FunctionArgument)
 	 */
 	@Override
-	protected FunctionArgument<?> execute(FunctionArgument<?> a) throws IllegalArgumentException {
-		if(a.getType()==FunctionArgument.ArgumentType.STRING){
-			Integer number = FunctionArgumentFactory.createDouble((String)a.getValue()).getValue().intValue();
-			return FunctionArgumentFactory.createString(number.toString());
+	protected FunctionArgument<?> execute(FunctionArgument<Integer> a) throws IllegalArgumentException {
+
+		if(a instanceof IntegerArgument){
+			return FunctionArgumentFactory.createString(((IntegerArgument)a).getValue().toString());
 		}
 		throw new IllegalArgumentException(String.format("only string as type is supported and not ", a.getType()));
 	}

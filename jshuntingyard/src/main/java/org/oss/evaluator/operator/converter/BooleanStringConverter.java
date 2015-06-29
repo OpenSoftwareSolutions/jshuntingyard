@@ -11,8 +11,8 @@
 package org.oss.evaluator.operator.converter;
 
 import org.oss.evaluator.function.FunctionArgument;
+import org.oss.evaluator.function.impl.DoubleArgument;
 import org.oss.evaluator.function.impl.FunctionArgumentFactory;
-import org.oss.evaluator.operator.AbstractStringOperatorAssociativityLeftOneArg;
 
 
 /**
@@ -20,7 +20,7 @@ import org.oss.evaluator.operator.AbstractStringOperatorAssociativityLeftOneArg;
  * Boolean to String
  *
  */
-public class BooleanStringConverter extends AbstractStringOperatorAssociativityLeftOneArg {
+public class BooleanStringConverter extends AbstractDouble2StringConverterOperatorAssociativityLeftOneArg {
 
 	public BooleanStringConverter() {
 		super("booleanString", Precedence.USERFUNCTION);
@@ -37,14 +37,12 @@ public class BooleanStringConverter extends AbstractStringOperatorAssociativityL
 	 * @see org.oss.evaluator.function.string.AbstractStringOperatorAssociativityLeftOneArg#execute(org.oss.evaluator.function.FunctionArgument)
 	 */
 	@Override
-	protected FunctionArgument<?> execute(FunctionArgument<?> a) throws IllegalArgumentException {
+	protected FunctionArgument<?> execute(FunctionArgument<Double> a) throws IllegalArgumentException {
 
-		if(a.getType()==FunctionArgument.ArgumentType.STRING){
-			FunctionArgument<Double> d = FunctionArgumentFactory.createDouble((String)a.getValue());
-			String result = d.getValue().compareTo(TRUE) == 0 ? "TRUE" : "FALSE";
+		if(a instanceof DoubleArgument){
+			String result = a.getValue().compareTo(TRUE) == 0 ? "TRUE" : "FALSE";
 			return FunctionArgumentFactory.createString(result);
 		}
-
 		throw new IllegalArgumentException(String.format("only string as type is supported and not ", a.getType()));
 	}
 

@@ -20,14 +20,14 @@ public class ConverterTest {
 
 	@Test
 	public void booleanStringConverterTrue() {
-		FunctionArgument<?> result = new Evaluator("booleanString ( '1.0' ) ").evaluate();
+		FunctionArgument<?> result = new Evaluator("booleanString ( 1.0 ) ").evaluate();
 		AssertUtil.assertStringResult(result, "TRUE");
 	}
 
 
 	@Test
 	public void booleanStringConverterFalse() {
-		FunctionArgument<?> result = new Evaluator("booleanString ( '0.0' ) ").evaluate();
+		FunctionArgument<?> result = new Evaluator("booleanString ( 0.0 ) ").evaluate();
 		AssertUtil.assertStringResult(result, "FALSE");
 	}
 
@@ -41,13 +41,13 @@ public class ConverterTest {
 
 	@Test
 	public void doubleStringConverter() {
-		FunctionArgument<?> result = new Evaluator("doubleString ( '56.00' ) ").evaluate();
+		FunctionArgument<?> result = new Evaluator("doubleString ( 56.00 ) ").evaluate();
 		AssertUtil.assertStringResult(result, "56.0");
 	}
 
 	@Test
 	public void integerStringConverter() {
-		FunctionArgument<?> result = new Evaluator("intString ( '1234' ) ").evaluate();
+		FunctionArgument<?> result = new Evaluator("intString ( 1234 ) ").evaluate();
 		AssertUtil.assertStringResult(result, "1234");
 	}
 
