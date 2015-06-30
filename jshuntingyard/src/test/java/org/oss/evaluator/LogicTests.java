@@ -25,9 +25,15 @@ public class LogicTests {
 	}
 
 	@Test
-	public void booleanEvalLogicalNotTrue() {
+	public void booleanEvalLogicalNotTrueFalse() {
 		FunctionArgument<?> result = new Evaluator("! true").evaluate();
 		AssertUtil.assertBooleanResult(result, Boolean.FALSE);
+	}
+
+	@Test
+	public void booleanEvalLogicalNotTrueTrue() {
+		FunctionArgument<?> result = new Evaluator("! false").evaluate();
+		AssertUtil.assertBooleanResult(result, Boolean.TRUE);
 	}
 
 	@Test
@@ -44,8 +50,26 @@ public class LogicTests {
 
 
 	@Test
-	public void booleanEvalLogicalAndFalse() {
+	public void booleanEvalLogicalAndTrueFalse() {
 		FunctionArgument<?> result = new Evaluator(" 2 < 4  &&  3 > 4 ").evaluate();
+		AssertUtil.assertBooleanResult(result, Boolean.FALSE);
+	}
+
+	@Test
+	public void booleanEvalLogicalAndTrueTrue() {
+		FunctionArgument<?> result = new Evaluator(" 3 < 4  &&  5 > 4 ").evaluate();
+		AssertUtil.assertBooleanResult(result, Boolean.TRUE);
+	}
+
+	@Test
+	public void booleanEvalLogicalAndFalseTrue() {
+		FunctionArgument<?> result = new Evaluator(" 5 < 4  &&  6 > 4 ").evaluate();
+		AssertUtil.assertBooleanResult(result, Boolean.FALSE);
+	}
+
+	@Test
+	public void booleanEvalLogicalAndFalseFalse() {
+		FunctionArgument<?> result = new Evaluator(" 6 < 4  &&  3 > 4 ").evaluate();
 		AssertUtil.assertBooleanResult(result, Boolean.FALSE);
 	}
 
@@ -59,5 +83,16 @@ public class LogicTests {
 	public void booleanEvalLogicalOrFalse() {
 		FunctionArgument<?> result = new Evaluator(" 5 < 4  || 3 > 4 ").evaluate();
 		AssertUtil.assertBooleanResult(result, Boolean.FALSE);
+	}
+
+	@Test
+	public void booleanEvalLogicalOrTrueTrue() {
+		FunctionArgument<?> result = new Evaluator(" 5 < 4  || 5 > 4 ").evaluate();
+		AssertUtil.assertBooleanResult(result, Boolean.TRUE);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void booleanEvalLogicalOrStringNumber() {
+		FunctionArgument<?> result = new Evaluator(" '2'  || 5 > 4 ").evaluate();
 	}
 }

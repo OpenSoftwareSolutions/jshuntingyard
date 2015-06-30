@@ -16,20 +16,14 @@ package org.oss.evaluator.operator.logic;
 import org.oss.evaluator.function.FunctionArgument;
 import org.oss.evaluator.function.impl.FunctionArgumentFactory;
 
-public class AndOperator extends AbstractLogicOperation {
+public class AndOperator extends AbstractLogicOperatorAssociativityLeftTwoArg {
 
 	public AndOperator() {
-		super("&&", 2, Precedence.LOGICAL_AND);
+		super("&&", Precedence.LOGICAL_AND);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public FunctionArgument<Boolean> execute(FunctionArgument<?>... args)
-			throws IllegalArgumentException {
-		assertNumArgs(args);
-		assertBoolean(args);
-		FunctionArgument<Boolean> a = (FunctionArgument<Boolean>) args[0];
-		FunctionArgument<Boolean> b = (FunctionArgument<Boolean>) args[1];
+	public FunctionArgument<Boolean> execute(FunctionArgument<Boolean> a, FunctionArgument<Boolean> b) throws IllegalArgumentException {
 		return FunctionArgumentFactory.createObject(a.getValue() && b.getValue());
 	}
 

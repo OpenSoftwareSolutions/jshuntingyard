@@ -12,24 +12,23 @@
  *
  */
 package org.oss.evaluator.operator.logic;
-
 import org.oss.evaluator.function.FunctionArgument;
-import org.oss.evaluator.function.impl.FunctionArgumentFactory;
 
-public class NotOperator extends AbstractLogicOperatorAssociativityLeftOneArg {
+public abstract class AbstractLogicOperatorAssociativityLeftTwoArg extends AbstractLogicOperation {
 
-	public NotOperator() {
-		super("!", Precedence.UNARY);
+
+	public AbstractLogicOperatorAssociativityLeftTwoArg(String name, Precedence precendence) {
+		super(name, 2, precendence);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public FunctionArgument<Boolean> execute(FunctionArgument<Boolean> arg) throws IllegalArgumentException {
-		return FunctionArgumentFactory.createObject(!arg.getValue());
+	public FunctionArgument<?> execute(FunctionArgument<?>... args) throws IllegalArgumentException {
+		assertNumArgs(args);
+		assertBoolean(args);
+		return execute((FunctionArgument<Boolean>)args[0], (FunctionArgument<Boolean>)args[1]);
 	}
 
-	@Override
-	public boolean isUserFunction() {
-		return false;
-	}
+	abstract protected FunctionArgument<Boolean> execute(FunctionArgument<Boolean> a, FunctionArgument<Boolean> b) throws IllegalArgumentException;
 
 }
