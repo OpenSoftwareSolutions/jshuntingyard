@@ -17,7 +17,8 @@ import java.util.Date;
 
 import org.oss.evaluator.function.FunctionArgument;
 import org.oss.evaluator.function.impl.FunctionArgumentFactory;
-import org.oss.evaluator.function.string.AbstractStringOperatorAssociativityLeftTwoArg;
+import org.oss.evaluator.function.impl.StringArgument;
+import org.oss.evaluator.function.string.AbstractStringOperatorAssociativityLeftTwoStringArg;
 
 
 
@@ -25,7 +26,7 @@ import org.oss.evaluator.function.string.AbstractStringOperatorAssociativityLeft
  * Truncate date to month or year.
  *
  */
-public class TruncateDateTo extends AbstractStringOperatorAssociativityLeftTwoArg {
+public class TruncateDateTo extends AbstractStringOperatorAssociativityLeftTwoStringArg {
 
 	private final static String MODE_MONTH = "'M'";
 
@@ -42,18 +43,15 @@ public class TruncateDateTo extends AbstractStringOperatorAssociativityLeftTwoAr
 	 * @see org.oss.evaluator.function.string.AbstractStringOperatorAssociativityLeftTwoArg#execute(org.oss.evaluator.function.FunctionArgument, org.oss.evaluator.function.FunctionArgument)
 	 */
 	@Override
-	protected FunctionArgument<?> execute(FunctionArgument<?> a, FunctionArgument<?> b) throws IllegalArgumentException {
+	protected FunctionArgument<?> execute(FunctionArgument<String> a, FunctionArgument<String> b) throws IllegalArgumentException {
 
 
-		if (a.getType()==FunctionArgument.ArgumentType.STRING && b.getType()==FunctionArgument.ArgumentType.STRING) {
-
-			String mode = (String) a.getValue();
-			String strDate = (String) b.getValue();
+		if (a instanceof StringArgument && b instanceof StringArgument) {
 
 		    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		    Date d = null;
 			try {
-				d = dateFormat.parse(strDate);
+				d = dateFormat.parse(b.getValue());
 			} catch (ParseException e) {
 				throw new IllegalArgumentException(e);
 			}
@@ -66,7 +64,7 @@ public class TruncateDateTo extends AbstractStringOperatorAssociativityLeftTwoAr
 			int month = calendar.get(Calendar.MONTH);
 			calendar.clear();
 			calendar.set(Calendar.YEAR, year);
-			if (mode.equalsIgnoreCase(MODE_MONTH)) {
+			if (a.getValue().equalsIgnoreCase(MODE_MONTH)) {
 				calendar.set(Calendar.MONTH, month);
 			}
 			date = calendar.getTimeInMillis();
