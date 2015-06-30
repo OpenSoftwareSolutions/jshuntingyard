@@ -13,28 +13,23 @@
  */
 package org.oss.evaluator.function.math;
 import org.oss.evaluator.function.FunctionArgument;
-import org.oss.evaluator.function.impl.DoubleArgument;
-import org.oss.evaluator.function.impl.FunctionArgumentFactory;
+import org.oss.evaluator.operator.AbstractNumericOperator;
 
-public class Round extends AbstractNumericOperatorAssociativityLeftOneArgReturnInt {
+public abstract class AbstractNumericOperatorAssociativityLeftOneArgReturnInt extends AbstractNumericOperator {
 
-	public Round() {
-		super("round", Precedence.USERFUNCTION);
-	}
 
-	@Override
-	public boolean isUserFunction() {
-		return true;
+	public AbstractNumericOperatorAssociativityLeftOneArgReturnInt(String name, Precedence precendence) {
+		super(name, 1, Associativity.LEFT, precendence);
 	}
 
 
 	@Override
-	protected FunctionArgument<Integer> execute(FunctionArgument<Double> a) throws IllegalArgumentException {
-
-		if (a instanceof DoubleArgument) {
-			return FunctionArgumentFactory.createObject((int)Math.round(getDouble(a)));
-		}
-
-		throw new IllegalArgumentException(String.format("only double operator supported and not ", a.getType()));
+	public FunctionArgument<?> execute(FunctionArgument<?>... args) throws IllegalArgumentException {
+		assertNumArgs(args);
+		assertNumeric(args);
+		return execute((FunctionArgument<Double>)args[0]);
 	}
+
+	abstract protected FunctionArgument<Integer> execute(FunctionArgument<Double> a) throws IllegalArgumentException;
+
 }

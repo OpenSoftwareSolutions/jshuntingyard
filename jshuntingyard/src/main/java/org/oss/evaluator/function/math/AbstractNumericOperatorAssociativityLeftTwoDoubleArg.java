@@ -12,14 +12,15 @@
  *
  */
 package org.oss.evaluator.function.math;
+import org.oss.evaluator.function.Function;
 import org.oss.evaluator.function.FunctionArgument;
 import org.oss.evaluator.operator.AbstractNumericOperator;
 
-public abstract class AbstractNumericOperatorAssociativityLeftOneArg extends AbstractNumericOperator {
+public abstract class AbstractNumericOperatorAssociativityLeftTwoDoubleArg extends AbstractNumericOperator {
 
 
-	public AbstractNumericOperatorAssociativityLeftOneArg(String name, Precedence precendence) {
-		super(name, 1, Associativity.LEFT, precendence);
+	public AbstractNumericOperatorAssociativityLeftTwoDoubleArg(String name, Precedence precendence) {
+		super(name, 2, Function.Associativity.LEFT, precendence);
 	}
 
 
@@ -27,9 +28,9 @@ public abstract class AbstractNumericOperatorAssociativityLeftOneArg extends Abs
 	public FunctionArgument<?> execute(FunctionArgument<?>... args) throws IllegalArgumentException {
 		assertNumArgs(args);
 		assertNumeric(args);
-		return execute((FunctionArgument<Double>)args[0]);
+		return execute((FunctionArgument<Double>)args[0], (FunctionArgument<Double>)args[1]);
 	}
 
-	abstract protected FunctionArgument<Double> execute(FunctionArgument<Double> a) throws IllegalArgumentException;
+	abstract protected FunctionArgument<Double> execute(FunctionArgument<Double> a, FunctionArgument<Double> b) throws IllegalArgumentException;
 
 }

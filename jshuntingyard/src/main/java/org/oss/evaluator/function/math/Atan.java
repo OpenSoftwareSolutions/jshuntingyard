@@ -14,6 +14,7 @@
 package org.oss.evaluator.function.math;
 
 import org.oss.evaluator.function.FunctionArgument;
+import org.oss.evaluator.function.impl.DoubleArgument;
 import org.oss.evaluator.function.impl.FunctionArgumentFactory;
 
 /**
@@ -34,9 +35,9 @@ public class Atan extends AbstractNumericOperatorAssociativityLeftOneArg {
 	 * @see org.oss.evaluator.operator.AbstractNumericOperatorAssociativityLeftOneArg#execute(org.oss.evaluator.function.FunctionArgument)
 	 */
 	@Override
-	public FunctionArgument<?> execute(FunctionArgument<?> a) throws IllegalArgumentException {
+	public FunctionArgument<Double> execute(FunctionArgument<Double> a) throws IllegalArgumentException {
 
-		if (a.getType()==FunctionArgument.ArgumentType.DOUBLE) {
+		if (a instanceof DoubleArgument) {
 			return FunctionArgumentFactory.createObject(Math.atan(getDouble(a)));
 		}
 		throw new IllegalArgumentException(String.format("only double operator supported and not ", a.getType()));
