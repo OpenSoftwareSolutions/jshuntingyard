@@ -31,11 +31,69 @@ public class PrimitiveTest {
 		AssertUtil.assertIntegerResult(result,7);
 	}
 
+	@Test
+	public void basicOperatorsDivide() {
+		FunctionArgument<?> result = new Evaluator("10 / 2").evaluate();
+		AssertUtil.assertIntegerResult(result,5);
+	}
 
 	@Test
 	public void basicOperatorsModulo() {
 		FunctionArgument<?> result = new Evaluator("10 % 3").evaluate();
 		AssertUtil.assertIntegerResult(result,1);
+	}
+
+	@Test
+	public void basicAdd() {
+		FunctionArgument<?> result = new Evaluator("10 + 3").evaluate();
+		AssertUtil.assertIntegerResult(result,13);
+	}
+
+	@Test
+	public void basicIntegerSubstraction() {
+		FunctionArgument<?> result = new Evaluator("10 - 3").evaluate();
+		AssertUtil.assertIntegerResult(result,7);
+	}
+
+	@Test
+	public void basicDoubleSubstraction() {
+		FunctionArgument<?> result = new Evaluator("10.0 - 3.0").evaluate();
+		AssertUtil.assertDoubleResult(result,7.0);
+	}
+
+	@Test
+	public void basicIntegerPower() {
+		FunctionArgument<?> result = new Evaluator("8 ^ 2").evaluate();
+		AssertUtil.assertIntegerResult(result,64);
+	}
+
+	@Test
+	public void basicDoublePower() {
+		FunctionArgument<?> result = new Evaluator("8.0 ^ 2.0").evaluate();
+		AssertUtil.assertDoubleResult(result,64.0);
+	}
+
+	@Test
+	public void basicDoubleIntegerPower() {
+		FunctionArgument<?> result = new Evaluator("8.0 ^ 2").evaluate();
+		AssertUtil.assertDoubleResult(result,64.0);
+	}
+
+	@Test
+	public void basicAddString() {
+		FunctionArgument<?> result = new Evaluator("'8' + '2'").evaluate();
+		AssertUtil.assertStringResult(result,"82");
+	}
+
+	@Test
+	public void basicAddDouble() {
+		FunctionArgument<?> result = new Evaluator("8.0 + 2.0").evaluate();
+		AssertUtil.assertDoubleResult(result,10.0);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void basicAddDoubleString() {
+		FunctionArgument<?> result = new Evaluator("8.0 + '2.0'").evaluate();
 	}
 
 }
