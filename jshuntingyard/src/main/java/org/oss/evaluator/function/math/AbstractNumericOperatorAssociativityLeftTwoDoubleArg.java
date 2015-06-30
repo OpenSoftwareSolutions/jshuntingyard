@@ -24,6 +24,7 @@ public abstract class AbstractNumericOperatorAssociativityLeftTwoDoubleArg exten
 	}
 
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public FunctionArgument<?> execute(FunctionArgument<?>... args) throws IllegalArgumentException {
 		assertNumArgs(args);

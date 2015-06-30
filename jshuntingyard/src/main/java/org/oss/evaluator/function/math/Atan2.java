@@ -16,7 +16,6 @@ package org.oss.evaluator.function.math;
 import org.oss.evaluator.function.FunctionArgument;
 import org.oss.evaluator.function.impl.DoubleArgument;
 import org.oss.evaluator.function.impl.FunctionArgumentFactory;
-import org.oss.evaluator.operator.AbstractNumericOperatorAssociativityLeftTwoArg;
 
 
 /**
