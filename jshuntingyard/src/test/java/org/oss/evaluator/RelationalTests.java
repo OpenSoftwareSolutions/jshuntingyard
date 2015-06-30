@@ -19,6 +19,18 @@ import org.oss.evaluator.function.FunctionArgument;
 public class RelationalTests {
 
 	@Test
+	public void booleanEvalNullFalse() {
+		FunctionArgument<?> result = new Evaluator("null == true").evaluate();
+		AssertUtil.assertBooleanResult(result, Boolean.FALSE);
+	}
+
+	@Test
+	public void booleanEvalNullTrue() {
+		FunctionArgument<?> result = new Evaluator("null == null").evaluate();
+		AssertUtil.assertBooleanResult(result, Boolean.TRUE);
+	}
+
+	@Test
 	public void booleanEvalTrue() {
 		FunctionArgument<?> result = new Evaluator("true == true").evaluate();
 		AssertUtil.assertBooleanResult(result, Boolean.TRUE);
@@ -95,6 +107,12 @@ public class RelationalTests {
 	}
 
 	@Test
+	public void booleanEvalIntegerGreaterOrEqualToFalse() {
+		FunctionArgument<?> result = new Evaluator("9 >= 10").evaluate();
+		AssertUtil.assertBooleanResult(result, Boolean.FALSE);
+	}
+
+	@Test
 	public void booleanEvalStringEqualTrue() {
 		FunctionArgument<?> result = new Evaluator("'foo' == 'foo'").evaluate();
 		AssertUtil.assertBooleanResult(result, Boolean.TRUE);
@@ -110,6 +128,12 @@ public class RelationalTests {
 	public void booleanEvalStringNotEqualTrue() {
 		FunctionArgument<?> result = new Evaluator("'foo' != 'bar'").evaluate();
 		AssertUtil.assertBooleanResult(result, Boolean.TRUE);
+	}
+
+	@Test
+	public void booleanEvalStringNotEqualFalse() {
+		FunctionArgument<?> result = new Evaluator("'foo' != 'foo'").evaluate();
+		AssertUtil.assertBooleanResult(result, Boolean.FALSE);
 	}
 
 	@Test

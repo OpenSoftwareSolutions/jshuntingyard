@@ -23,8 +23,7 @@ public class NotEqualTo extends AbstractRelationalOperator {
 	}
 
 	@Override
-	protected FunctionArgument<Boolean> execute(Relation relation)
-			throws IllegalArgumentException {
+	protected FunctionArgument<Boolean> execute(Relation relation) throws IllegalArgumentException {
 		return FunctionArgumentFactory.createObject(!(Relation.EQUAL==relation));
 	}
 
