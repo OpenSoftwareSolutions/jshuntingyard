@@ -31,12 +31,21 @@ public class ConverterTest {
 		AssertUtil.assertStringResult(result, "FALSE");
 	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void booleanStringConverterException() {
+		FunctionArgument<?> result = new Evaluator("booleanString ( 0 ) ").evaluate();
+	}
 
-	//@Test
-	// FIXME
+
+	@Test
 	public void dateStringConverter() {
-		FunctionArgument<?> result = new Evaluator("dateString ( 'MM/dd/yyyy' ) ").evaluate();
-		System.out.println(result);
+		FunctionArgument<?> result = new Evaluator("dateString ( 09.1974 ) ").evaluate();
+		AssertUtil.assertStringResult(result, "(date)9.1974");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void dateStringConverterException() {
+		FunctionArgument<?> result = new Evaluator("dateString ( 1974 ) ").evaluate();
 	}
 
 	@Test
@@ -45,10 +54,21 @@ public class ConverterTest {
 		AssertUtil.assertStringResult(result, "56.0");
 	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void doubleStringExceptionConverter() {
+		FunctionArgument<?> result = new Evaluator("doubleString (1234) ").evaluate();
+		AssertUtil.assertStringResult(result, "56.0");
+	}
+
 	@Test
 	public void integerStringConverter() {
 		FunctionArgument<?> result = new Evaluator("intString ( 1234 ) ").evaluate();
 		AssertUtil.assertStringResult(result, "1234");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void integerStringExceptionConverter() {
+		FunctionArgument<?> result = new Evaluator("intString ( 56.00 ) ").evaluate();
 	}
 
 }
