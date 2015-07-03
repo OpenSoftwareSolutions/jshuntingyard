@@ -14,61 +14,62 @@
 package org.oss.evaluator;
 
 import org.junit.Test;
-import org.oss.evaluator.function.FunctionArgument;
+import org.oss.jshuntingyard.evaluator.FunctionElementArgument;
+import org.oss.jshuntingyard.evaluator.interpreter.Evaluator;
 
 public class ConverterTest {
 
 	@Test
 	public void booleanStringConverterTrue() {
-		FunctionArgument<?> result = new Evaluator("booleanString ( 1.0 ) ").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("booleanString ( true ) ").evaluate();
 		AssertUtil.assertStringResult(result, "TRUE");
 	}
 
 
 	@Test
 	public void booleanStringConverterFalse() {
-		FunctionArgument<?> result = new Evaluator("booleanString ( 0.0 ) ").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("booleanString ( false ) ").evaluate();
 		AssertUtil.assertStringResult(result, "FALSE");
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = ClassCastException.class)
 	public void booleanStringConverterException() {
-		FunctionArgument<?> result = new Evaluator("booleanString ( 0 ) ").evaluate();
+		new Evaluator("booleanString ( 0 ) ").evaluate();
 	}
 
 
 	@Test
 	public void dateStringConverter() {
-		FunctionArgument<?> result = new Evaluator("dateString ( 09.1974 ) ").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("dateString ( 09.1974 ) ").evaluate();
 		AssertUtil.assertStringResult(result, "(date)9.1974");
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = ClassCastException.class)
 	public void dateStringConverterException() {
-		FunctionArgument<?> result = new Evaluator("dateString ( 1974 ) ").evaluate();
+		new Evaluator("dateString ( 1974 ) ").evaluate();
 	}
 
 	@Test
 	public void doubleStringConverter() {
-		FunctionArgument<?> result = new Evaluator("doubleString ( 56.00 ) ").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("doubleString ( 56.00 ) ").evaluate();
 		AssertUtil.assertStringResult(result, "56.0");
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = ClassCastException.class)
 	public void doubleStringExceptionConverter() {
-		FunctionArgument<?> result = new Evaluator("doubleString (1234) ").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("doubleString (1234) ").evaluate();
 		AssertUtil.assertStringResult(result, "56.0");
 	}
 
 	@Test
 	public void integerStringConverter() {
-		FunctionArgument<?> result = new Evaluator("intString ( 1234 ) ").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("intString ( 1234 ) ").evaluate();
 		AssertUtil.assertStringResult(result, "1234");
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = ClassCastException.class)
 	public void integerStringExceptionConverter() {
-		FunctionArgument<?> result = new Evaluator("intString ( 56.00 ) ").evaluate();
+		new Evaluator("intString ( 56.00 ) ").evaluate();
 	}
 
 }

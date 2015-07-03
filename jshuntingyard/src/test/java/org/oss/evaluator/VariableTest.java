@@ -14,7 +14,9 @@
 package org.oss.evaluator;
 
 import org.junit.Test;
-import org.oss.evaluator.function.FunctionArgument;
+import org.oss.jshuntingyard.evaluator.FunctionElementArgument;
+import org.oss.jshuntingyard.evaluator.interpreter.Evaluator;
+import org.oss.jshuntingyard.evaluator.interpreter.Variable;
 
 public class VariableTest {
 
@@ -29,7 +31,7 @@ public class VariableTest {
 		var2.value=22.89;
 		evaluator.bindVariable(var2);
 		evaluator.bindVariable(var1);
-		FunctionArgument<?> result = evaluator.evaluate();
+		FunctionElementArgument<?> result = evaluator.evaluate();
 		AssertUtil.assertDoubleResult(result,22.89);
 	}
 
@@ -44,7 +46,7 @@ public class VariableTest {
 		var2.value=22.89;
 		evaluator.bindVariable(var2);
 		evaluator.bindVariable(var1);
-		FunctionArgument<?> result = evaluator.evaluate();
+		FunctionElementArgument<?> result = evaluator.evaluate();
 		AssertUtil.assertDoubleResult(result,22.89);
 	}
 
@@ -59,7 +61,7 @@ public class VariableTest {
 		var2.value=22.89;
 		evaluator.bindVariable(var2);
 		evaluator.bindVariable(var1);
-		FunctionArgument<?> result = evaluator.evaluate();
+		FunctionElementArgument<?> result = evaluator.evaluate();
 		AssertUtil.assertDoubleResult(result,22.89);
 	}
 
@@ -74,7 +76,7 @@ public class VariableTest {
 		var2.value=22.89;
 		evaluator.bindVariable(var2);
 		evaluator.bindVariable(var1);
-		FunctionArgument<?> result = evaluator.evaluate();
+		FunctionElementArgument<?> result = evaluator.evaluate();
 		AssertUtil.assertDoubleResult(result,22.89);
 	}
 	@Test
@@ -84,7 +86,7 @@ public class VariableTest {
 		var1.name = "1";
 		var1.value = "welt";
 		evaluator.bindVariable(var1);
-		FunctionArgument<?> result = evaluator.evaluate();
+		FunctionElementArgument<?> result = evaluator.evaluate();
 		AssertUtil.assertStringResult(result,"hallo welt");
 	}
 	@Test
@@ -94,7 +96,7 @@ public class VariableTest {
 		var1.name = "1";
 		var1.value = 1;
 		evaluator.bindVariable(var1);
-		FunctionArgument<?> result = evaluator.evaluate();
+		FunctionElementArgument<?> result = evaluator.evaluate();
 		AssertUtil.assertIntegerResult(result,3);
 	}
 

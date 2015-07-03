@@ -14,19 +14,20 @@
 package org.oss.evaluator;
 
 import org.junit.Test;
-import org.oss.evaluator.function.FunctionArgument;
+import org.oss.jshuntingyard.evaluator.FunctionElementArgument;
+import org.oss.jshuntingyard.evaluator.interpreter.Evaluator;
 
 public class ConditionalTest {
 
 	@Test
 	public void conditionalYes() {
-		FunctionArgument<?> result = new Evaluator("ifelse ( '1.0' , 'YES' , 'NO' ) ").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("ifelse ( true , 'YES' , 'NO' ) ").evaluate();
 		AssertUtil.assertStringResult(result, "YES");
 	}
 
 	@Test
 	public void conditionalNo() {
-		FunctionArgument<?> result = new Evaluator("ifelse ( '0.0' , 'YES' , 'NO' ) ").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("ifelse ( false , 'YES' , 'NO' ) ").evaluate();
 		AssertUtil.assertStringResult(result, "NO");
 	}
 

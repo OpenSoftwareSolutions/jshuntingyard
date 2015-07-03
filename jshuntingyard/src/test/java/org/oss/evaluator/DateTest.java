@@ -14,30 +14,31 @@
 package org.oss.evaluator;
 
 import org.junit.Test;
-import org.oss.evaluator.function.FunctionArgument;
+import org.oss.jshuntingyard.evaluator.FunctionElementArgument;
+import org.oss.jshuntingyard.evaluator.interpreter.Evaluator;
 
 public class DateTest {
 	@Test
 	public void currentDate() {
-		FunctionArgument<?> result = new Evaluator("currentDate ( 'MM/dd/yyyy' ) ").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("currentDate ( 'MM/dd/yyyy' ) ").evaluate();
 		System.out.println(result);
 	}
 
 	@Test
 	public void now() {
-		FunctionArgument<?> result = new Evaluator("now ( ) ").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("now ( ) ").evaluate();
 		System.out.println(result);
 	}
 
 	@Test
 	public void truncateDateY() {
-		FunctionArgument<?> result = new Evaluator("truncateDateTo ( 'Y' , '1996-07-16' ) ").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("truncateDateTo ( 'Y' , '1996-07-16' ) ").evaluate();
 		AssertUtil.assertStringResult(result, "820450800000");
 	}
 
 	@Test
 	public void truncateDateM() {
-		FunctionArgument<?> result = new Evaluator("truncateDateTo ( 'M' , '1996-07-16' ) ").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("truncateDateTo ( 'M' , '1996-07-16' ) ").evaluate();
 		AssertUtil.assertStringResult(result, "820450800000");
 	}
 

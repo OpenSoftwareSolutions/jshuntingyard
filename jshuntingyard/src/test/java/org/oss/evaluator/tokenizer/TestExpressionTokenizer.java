@@ -2,8 +2,8 @@ package org.oss.evaluator.tokenizer;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.oss.evaluator.tokenizer.ExpressionToken;
-import org.oss.evaluator.tokenizer.ExpressionTokenizer;
+import org.oss.jshuntingyard.lexer.ExpressionToken;
+import org.oss.jshuntingyard.lexer.ExpressionTokenizer;
 
 
 

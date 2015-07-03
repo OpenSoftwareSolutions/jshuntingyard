@@ -14,149 +14,150 @@
 package org.oss.evaluator;
 
 import org.junit.Test;
-import org.oss.evaluator.function.FunctionArgument;
+import org.oss.jshuntingyard.evaluator.FunctionElementArgument;
+import org.oss.jshuntingyard.evaluator.interpreter.Evaluator;
 
 public class RelationalTests {
 
 	@Test
 	public void booleanEvalNullFalse() {
-		FunctionArgument<?> result = new Evaluator("null == true").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("null == true").evaluate();
 		AssertUtil.assertBooleanResult(result, Boolean.FALSE);
 	}
 
 	@Test
 	public void booleanEvalNullTrue() {
-		FunctionArgument<?> result = new Evaluator("null == null").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("null == null").evaluate();
 		AssertUtil.assertBooleanResult(result, Boolean.TRUE);
 	}
 
 	@Test
 	public void booleanEvalTrue() {
-		FunctionArgument<?> result = new Evaluator("true == true").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("true == true").evaluate();
 		AssertUtil.assertBooleanResult(result, Boolean.TRUE);
 	}
 
 	@Test
 	public void booleanEvalFalse() {
-		FunctionArgument<?> result = new Evaluator("False == true").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("False == true").evaluate();
 		AssertUtil.assertBooleanResult(result, Boolean.FALSE);
 	}
 
 	@Test
 	public void booleanEvalIntegerTrue() {
-		FunctionArgument<?> result = new Evaluator("7 == 7").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("7 == 7").evaluate();
 		AssertUtil.assertBooleanResult(result, Boolean.TRUE);
 	}
 
 	@Test
 	public void booleanEvalIntegerFalse() {
-		FunctionArgument<?> result = new Evaluator("3 == 7").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("3 == 7").evaluate();
 		AssertUtil.assertBooleanResult(result, Boolean.FALSE);
 	}
 
 	@Test
 	public void booleanEvalIntegerLesserTrue() {
-		FunctionArgument<?> result = new Evaluator("3 < 7").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("3 < 7").evaluate();
 		AssertUtil.assertBooleanResult(result, Boolean.TRUE);
 	}
 	@Test
 	public void booleanEvalIntegerLesserOrEqualToTrue() {
-		FunctionArgument<?> result = new Evaluator("3 <= 7").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("3 <= 7").evaluate();
 		AssertUtil.assertBooleanResult(result, Boolean.TRUE);
 	}
 	@Test
 	public void booleanEvalIntegerLesserOrEqualToBoundsTrue() {
-		FunctionArgument<?> result = new Evaluator("3 <= 3").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("3 <= 3").evaluate();
 		AssertUtil.assertBooleanResult(result, Boolean.TRUE);
 	}
 
 	@Test
 	public void booleanEvalIntegerLesserFalse() {
-		FunctionArgument<?> result = new Evaluator("10 < 7").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("10 < 7").evaluate();
 		AssertUtil.assertBooleanResult(result, Boolean.FALSE);
 	}
 
 	@Test
 	public void booleanEvalIntegerLesserOrEqualToFalse() {
-		FunctionArgument<?> result = new Evaluator("10 <= 7").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("10 <= 7").evaluate();
 		AssertUtil.assertBooleanResult(result, Boolean.FALSE);
 	}
 
 	@Test
 	public void booleanEvalIntegerGreaterTrue() {
-		FunctionArgument<?> result = new Evaluator("10 > 7").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("10 > 7").evaluate();
 		AssertUtil.assertBooleanResult(result, Boolean.TRUE);
 	}
 
 	@Test
 	public void booleanEvalIntegerGreaterFalse() {
-		FunctionArgument<?> result = new Evaluator("10 > 10").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("10 > 10").evaluate();
 		AssertUtil.assertBooleanResult(result, Boolean.FALSE);
 	}
 
 	@Test
 	public void booleanEvalIntegerGreaterOrEqualToTrue() {
-		FunctionArgument<?> result = new Evaluator("10 >= 7").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("10 >= 7").evaluate();
 		AssertUtil.assertBooleanResult(result, Boolean.TRUE);
 	}
 
 	@Test
 	public void booleanEvalIntegerGreaterOrEqualToBoundsTrue() {
-		FunctionArgument<?> result = new Evaluator("10 >= 10").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("10 >= 10").evaluate();
 		AssertUtil.assertBooleanResult(result, Boolean.TRUE);
 	}
 
 	@Test
 	public void booleanEvalIntegerGreaterOrEqualToFalse() {
-		FunctionArgument<?> result = new Evaluator("9 >= 10").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("9 >= 10").evaluate();
 		AssertUtil.assertBooleanResult(result, Boolean.FALSE);
 	}
 
 	@Test
 	public void booleanEvalStringEqualTrue() {
-		FunctionArgument<?> result = new Evaluator("'foo' == 'foo'").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("'foo' == 'foo'").evaluate();
 		AssertUtil.assertBooleanResult(result, Boolean.TRUE);
 	}
 
 	@Test
 	public void booleanEvalStringEqualFalse() {
-		FunctionArgument<?> result = new Evaluator("'foo' == 'bar'").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("'foo' == 'bar'").evaluate();
 		AssertUtil.assertBooleanResult(result, Boolean.FALSE);
 	}
 
 	@Test
 	public void booleanEvalStringNotEqualTrue() {
-		FunctionArgument<?> result = new Evaluator("'foo' != 'bar'").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("'foo' != 'bar'").evaluate();
 		AssertUtil.assertBooleanResult(result, Boolean.TRUE);
 	}
 
 	@Test
 	public void booleanEvalStringNotEqualFalse() {
-		FunctionArgument<?> result = new Evaluator("'foo' != 'foo'").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("'foo' != 'foo'").evaluate();
 		AssertUtil.assertBooleanResult(result, Boolean.FALSE);
 	}
 
 	@Test
 	public void booleanEvalStringEqualToFalse() {
-		FunctionArgument<?> result = new Evaluator("'AB' == 'AA'").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("'AB' == 'AA'").evaluate();
 		AssertUtil.assertBooleanResult(result, Boolean.FALSE);
 	}
 
 	@Test
 	public void booleanEvalStringGreaterFalse() {
-		FunctionArgument<?> result = new Evaluator("'AB' == 'A'").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("'AB' == 'A'").evaluate();
 		AssertUtil.assertBooleanResult(result, Boolean.FALSE);
 	}
 
 	@Test
 	public void booleanEvalIntegerCalc1() {
-		FunctionArgument<?> result = new Evaluator("6 == ( 3 + 2 )").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("6 == ( 3 + 2 )").evaluate();
 		AssertUtil.assertBooleanResult(result, Boolean.FALSE);
 	}
 
 	@Test
 	public void booleanEvalIntegerCalc2() {
-		FunctionArgument<?> result = new Evaluator("6 == 3 + 2 ").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("6 == 3 + 2 ").evaluate();
 		AssertUtil.assertBooleanResult(result, Boolean.FALSE);
 	}
 }

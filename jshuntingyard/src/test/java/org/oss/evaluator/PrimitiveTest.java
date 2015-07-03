@@ -14,86 +14,112 @@
 package org.oss.evaluator;
 
 import org.junit.Test;
-import org.oss.evaluator.function.FunctionArgument;
+import org.oss.jshuntingyard.evaluator.FunctionElementArgument;
+import org.oss.jshuntingyard.evaluator.interpreter.Evaluator;
 
 public class PrimitiveTest {
 
 
 	@Test
 	public void basicOperatorsCalc() {
-		FunctionArgument<?> result = new Evaluator("( 1 + 2 ) * ( 3 / 4 ) ^ ( 5 + 6 )").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("( 1 + 2 ) * ( 3 / 4 ) ^ ( 5 + 6 )").evaluate();
 		AssertUtil.assertDoubleResult(result,0.12670540809631348);
 	}
 
 	@Test
 	public void basicOperatorsPrecedence() {
-		FunctionArgument<?> result = new Evaluator("1 + 2 * 3").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("1 + 2 * 3").evaluate();
 		AssertUtil.assertIntegerResult(result,7);
 	}
 
 	@Test
 	public void basicOperatorsDivide() {
-		FunctionArgument<?> result = new Evaluator("10 / 2").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("10 / 2").evaluate();
 		AssertUtil.assertIntegerResult(result,5);
 	}
 
 	@Test
 	public void basicOperatorsModulo() {
-		FunctionArgument<?> result = new Evaluator("10 % 3").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("10 % 3").evaluate();
 		AssertUtil.assertIntegerResult(result,1);
 	}
 
 	@Test
 	public void basicAdd() {
-		FunctionArgument<?> result = new Evaluator("10 + 3").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("10 + 3").evaluate();
 		AssertUtil.assertIntegerResult(result,13);
 	}
 
 	@Test
 	public void basicIntegerSubstraction() {
-		FunctionArgument<?> result = new Evaluator("10 - 3").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("10 - 3").evaluate();
 		AssertUtil.assertIntegerResult(result,7);
 	}
 
 	@Test
 	public void basicDoubleSubstraction() {
-		FunctionArgument<?> result = new Evaluator("10.0 - 3.0").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("10.0 - 3.0").evaluate();
 		AssertUtil.assertDoubleResult(result,7.0);
 	}
 
 	@Test
 	public void basicIntegerPower() {
-		FunctionArgument<?> result = new Evaluator("8 ^ 2").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("8 ^ 2").evaluate();
 		AssertUtil.assertIntegerResult(result,64);
 	}
 
 	@Test
 	public void basicDoublePower() {
-		FunctionArgument<?> result = new Evaluator("8.0 ^ 2.0").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("8.0 ^ 2.0").evaluate();
 		AssertUtil.assertDoubleResult(result,64.0);
 	}
 
 	@Test
 	public void basicDoubleIntegerPower() {
-		FunctionArgument<?> result = new Evaluator("8.0 ^ 2").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("8.0 ^ 2").evaluate();
 		AssertUtil.assertDoubleResult(result,64.0);
 	}
 
 	@Test
 	public void basicAddString() {
-		FunctionArgument<?> result = new Evaluator("'8' + '2'").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("'8' + '2'").evaluate();
 		AssertUtil.assertStringResult(result,"82");
+	}
+	
+	@Test
+	public void basicDivideIntDouble() {
+		FunctionElementArgument<?> result = new Evaluator("10 / 2.5").evaluate();
+		AssertUtil.assertDoubleResult(result,4.0);
+	}
+	
+	@Test
+	public void basicMultiplyIntDouble() {
+		FunctionElementArgument<?> result = new Evaluator("10 * 2.5").evaluate();
+		AssertUtil.assertDoubleResult(result,25.0);
+	}
+	
+	@Test
+	public void basicMultiplyDoubleInt() {
+		FunctionElementArgument<?> result = new Evaluator("4.3 * 2").evaluate();
+		AssertUtil.assertDoubleResult(result,8.6);
+	}
+	
+	
+	@Test
+	public void basicDivideDoubleInt() {
+		FunctionElementArgument<?> result = new Evaluator("7.5 / 3").evaluate();
+		AssertUtil.assertDoubleResult(result,2.5);
 	}
 
 	@Test
 	public void basicAddDouble() {
-		FunctionArgument<?> result = new Evaluator("8.0 + 2.0").evaluate();
-		AssertUtil.assertDoubleResult(result,10.0);
+		FunctionElementArgument<?> result = new Evaluator("8.0 + 2.3").evaluate();
+		AssertUtil.assertDoubleResult(result,10.3);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void basicAddDoubleString() {
-		FunctionArgument<?> result = new Evaluator("8.0 + '2.0'").evaluate();
+		FunctionElementArgument<?> result = new Evaluator("8.0 + '2.0'").evaluate();
 	}
 
 }
