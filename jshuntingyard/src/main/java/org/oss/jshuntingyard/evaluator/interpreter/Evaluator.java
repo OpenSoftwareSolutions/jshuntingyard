@@ -13,6 +13,7 @@
  */
 package org.oss.jshuntingyard.evaluator.interpreter;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -30,22 +31,38 @@ public class Evaluator {
 
 	private static Logger logger = Logger.getLogger(Evaluator.class.getName());
 	private final Map<String,Variable> boundVariables;
+	private final ExtendedSHuntingYardParser parser;
 	private final Expression expression;
 
 	public Evaluator(String evalExpression){
 		this.boundVariables = new HashMap<String,Variable>();
-		this.expression = new ExtendedSHuntingYardParser().infixToRPN(evalExpression);
+		this.parser = new ExtendedSHuntingYardParser();
+		this.expression = evalExpression == null ? null : parser.infixToRPN(evalExpression);
 	}
 
 	public Evaluator(){
-		this.boundVariables = new HashMap<String,Variable>();
-		this.expression = null;
+		this(null);
 	}
 
 	public void bindVariable(Variable variable) {
 		boundVariables.put(variable.getName(), variable);
 	}
 
+	/**
+	 * add user defined function.
+	 * @param function
+	 */
+	public void addFunction(FunctionElement function) {
+		parser.addFunction(function);
+	}
+	
+	/**
+	 * add user defined functions
+	 * @param functions
+	 */
+	public void addFunctions(Collection<FunctionElement> functions) {
+		parser.addFunctions(functions);
+	}	
 
 	public FunctionElementArgument<?> evaluate(Expression expression) {
 
@@ -124,4 +141,6 @@ public class Evaluator {
 		}
 		return evaluate(expression);
 	}
+	
+	
 }

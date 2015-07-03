@@ -13,6 +13,7 @@
  */
 package org.oss.jshuntingyard.evaluator.parser;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -105,9 +106,9 @@ import org.oss.jshuntingyard.lexer.ExpressionTokenizer;
  */
 public class ExtendedSHuntingYardParser {
 
-	private final Map<String,FunctionElement> operators;
+	private final Map<String,FunctionElement> functionElements;
 	public ExtendedSHuntingYardParser() {
-		operators = new HashMap<String, FunctionElement>();
+		functionElements = new HashMap<String, FunctionElement>();
 		// Primitiv
 		addFunction(new Add());
 		addFunction(new Subtract());
@@ -188,7 +189,17 @@ public class ExtendedSHuntingYardParser {
 	 * @param function
 	 */
 	public void addFunction(FunctionElement function) {
-		operators.put(function.getName(), function);
+		functionElements.put(function.getName(), function);
+	}
+	
+	/**
+	 * add user defined functions
+	 * @param functions
+	 */
+	public void addFunctions(Collection<FunctionElement> functions) {
+		for (FunctionElement function : functions) {
+			addFunction(function);
+		}
 	}
 
 	/**
@@ -197,17 +208,17 @@ public class ExtendedSHuntingYardParser {
 	 * @return True if token is an operator . Otherwise False .
 	 */
 	private boolean isOperator(String token) {
-		return operators.containsKey(token);
+		return functionElements.containsKey(token);
 	}
 	/**
-	 * Test if a certain is an operator .
+	 * Test if a certain is an function element .
 	 * @param token The token to be tested .
 	 * @return True if token is an operator . Otherwise False .
 	 */
-	private boolean isOperator(ExpressionElement stackItem) {
+	private boolean isFunctionElement(ExpressionElement stackItem) {
 		if (stackItem instanceof FunctionElement) {
 			FunctionElement operator = (FunctionElement) stackItem;
-			return operators.containsKey(operator.getName());
+			return functionElements.containsKey(operator.getName());
 		}
 		return false;
 	}
@@ -220,7 +231,7 @@ public class ExtendedSHuntingYardParser {
 	 * @return True if the tokenType equals the input parameter type .
 	 */
 	private boolean isAssociative(FunctionElement operation, Associativity associativity) {
-		return operators.get(operation.getName()).getAssociativity() == associativity;
+		return functionElements.get(operation.getName()).getAssociativity() == associativity;
 	}
 
 	/**
@@ -232,7 +243,7 @@ public class ExtendedSHuntingYardParser {
 	 * otherwise.
 	 */
 	private final int cmpPrecedence(ExpressionElement token1, ExpressionElement token2) {
-		if (!isOperator(token1) || !isOperator(token2)) {
+		if (!isFunctionElement(token1) || !isFunctionElement(token2)) {
 			throw new IllegalArgumentException("Invalied tokens: " + token1
 					+ " " + token2);
 		}
@@ -260,14 +271,14 @@ public class ExtendedSHuntingYardParser {
 			for (int tokenIndex = 0; tokenIndex<inputTokens.length;tokenIndex++) {
 				String token = inputTokens[tokenIndex];
 				if (isOperator(token)) {
-					FunctionElement operator = operators.get(token);
+					FunctionElement operator = functionElements.get(token);
 					if (operator.isUserFunction()) {
 						tokenIndex = new UserFunctionParser(out).parse(inputTokens,tokenIndex);
 						out.add(operator);
 						continue;
 					}
 					// If token is an operator (x) [S3]
-					while (!stack.empty() && isOperator(stack.peek())) {
+					while (!stack.empty() && isFunctionElement(stack.peek())) {
 						// [S4]
 						if ((isAssociative(operator, Associativity.LEFT) && cmpPrecedence(
 								operator, stack.peek()) <= 0)
