@@ -6,7 +6,7 @@ import org.oss.jshuntingyard.evaluator.FunctionArgumentFactory;
 import org.oss.jshuntingyard.evaluator.FunctionElementArgument;
 import org.oss.jshuntingyard.evaluator.interpreter.Evaluator;
 
-public class VarArgTest {
+public class VarArgTests {
 
 	@Test
 	public void varagrgs() {
