@@ -195,9 +195,7 @@ public class MathTest {
 
 	@Test
 	public void mathOperatorsRandom() {
-		FunctionElementArgument<?> result1 = new Evaluator("random ( )").evaluate();
-		FunctionElementArgument<?> result2 = new Evaluator("random ( )").evaluate();
-		//System.out.println("random result1 = " + result1 + "random result2 = " + result2);
+		new Evaluator("random ( )").evaluate();
 	}
 
 	@Test

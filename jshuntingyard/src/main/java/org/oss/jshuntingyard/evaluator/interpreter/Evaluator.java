@@ -32,7 +32,7 @@ public class Evaluator {
 	private static Logger logger = Logger.getLogger(Evaluator.class.getName());
 	private final Map<String,Variable> boundVariables;
 	private final ExtendedSHuntingYardParser parser;
-	private final Expression expression;
+	private Expression expression;
 
 	public Evaluator(String evalExpression){
 		this.boundVariables = new HashMap<String,Variable>();
@@ -63,6 +63,22 @@ public class Evaluator {
 	public void addFunctions(Collection<FunctionElement> functions) {
 		parser.addFunctions(functions);
 	}	
+
+	/**
+	 * Evaluates last expression
+	 * @return
+	 */
+	public FunctionElementArgument<?> evaluate() {
+		if(expression == null || expression.isEmpty()){
+			throw new RuntimeException("There are no ExpressionElements in the List");
+		}
+		return evaluate(expression);
+	}
+
+	public FunctionElementArgument<?> evaluate(String evalExpression) {
+		expression = parser.infixToRPN(evalExpression);
+		return evaluate();
+	}
 
 	public FunctionElementArgument<?> evaluate(Expression expression) {
 
@@ -116,6 +132,8 @@ public class Evaluator {
 		}
 	}
 
+	
+	
 	private FunctionElementArgument<?> replaceVariable(Object value) {
 		if (value instanceof Integer) {
 			return FunctionArgumentFactory.createObject((Integer) value);
@@ -135,12 +153,6 @@ public class Evaluator {
 		return new NullArgument();
 	}
 
-	public FunctionElementArgument<?> evaluate() {
-		if(expression == null || expression.isEmpty()){
-			throw new RuntimeException("There are no ExpressionElements in the List");
-		}
-		return evaluate(expression);
-	}
 	
 	
 }

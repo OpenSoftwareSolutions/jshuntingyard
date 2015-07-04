@@ -21,10 +21,35 @@ public interface FunctionElement extends ExpressionElement {
 
 
 
+	/**
+	 * Associativity LEFT or RIGHT
+	 * @return
+	 */
 	Associativity getAssociativity();
+	/**
+	 * Number of parameters 0 - n for known number of arguments or -1 if the number is variable
+	 * @return
+	 */
 	int getNumberOfParameters();
+	/**
+	 * Operator precedence
+	 * @return
+	 */
 	Precedence getPrecendence();
+	/**
+	 * Name of the function
+	 * @return
+	 */
 	String getName();
+	/**
+	 * false for built in functions or true for user functions.
+	 * @return
+	 */
 	boolean isUserFunction();
+	/**
+	 * @param args
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
 	FunctionElementArgument<?> execute(FunctionElementArgument<?>... args) throws IllegalArgumentException;
 }

@@ -39,14 +39,6 @@ import org.oss.jshuntingyard.evaluator.operator.relational.GreaterThanOrEqualTo;
 import org.oss.jshuntingyard.evaluator.operator.relational.LessThan;
 import org.oss.jshuntingyard.evaluator.operator.relational.LessThanOrEqualTo;
 import org.oss.jshuntingyard.evaluator.operator.relational.NotEqualTo;
-import org.oss.jshuntingyard.evaluator.userfunction.conditional.IfElse;
-import org.oss.jshuntingyard.evaluator.userfunction.converter.BooleanStringConverter;
-import org.oss.jshuntingyard.evaluator.userfunction.converter.DateStringConverter;
-import org.oss.jshuntingyard.evaluator.userfunction.converter.DoubleStringConverter;
-import org.oss.jshuntingyard.evaluator.userfunction.converter.IntegerStringConverter;
-import org.oss.jshuntingyard.evaluator.userfunction.date.CurrentDate;
-import org.oss.jshuntingyard.evaluator.userfunction.date.Now;
-import org.oss.jshuntingyard.evaluator.userfunction.date.TruncateDateTo;
 import org.oss.jshuntingyard.evaluator.userfunction.math.Abs;
 import org.oss.jshuntingyard.evaluator.userfunction.math.Acos;
 import org.oss.jshuntingyard.evaluator.userfunction.math.Asin;
@@ -170,18 +162,6 @@ public class ExtendedSHuntingYardParser {
 		addFunction(new Like());
 		addFunction(new Matches());
 		addFunction(new NumberFormat());
-		// Date
-		addFunction(new CurrentDate());
-		addFunction(new Now());
-		addFunction(new TruncateDateTo());
-		// converter
-		addFunction(new BooleanStringConverter());
-		addFunction(new DateStringConverter());
-		addFunction(new DoubleStringConverter());
-		addFunction(new IntegerStringConverter());
-		// Conditional
-		addFunction(new IfElse());
-
 	}
 
 	/**
@@ -273,7 +253,11 @@ public class ExtendedSHuntingYardParser {
 				if (isOperator(token)) {
 					FunctionElement operator = functionElements.get(token);
 					if (operator.isUserFunction()) {
+						int paramsStart = out.size();
 						tokenIndex = new UserFunctionParser(out).parse(inputTokens,tokenIndex);
+						if (operator.getNumberOfParameters()==-1) {
+							operator = new VarArgFunctionElementWrapper(operator, out.size() - paramsStart);
+						}
 						out.add(operator);
 						continue;
 					}

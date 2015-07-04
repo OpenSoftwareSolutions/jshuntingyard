@@ -119,7 +119,7 @@ public class PrimitiveTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void basicAddDoubleString() {
-		FunctionElementArgument<?> result = new Evaluator("8.0 + '2.0'").evaluate();
+		new Evaluator("8.0 + '2.0'").evaluate();
 	}
 
 }
