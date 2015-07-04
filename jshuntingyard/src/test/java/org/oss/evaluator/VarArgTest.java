@@ -12,8 +12,9 @@ public class VarArgTest {
 	public void varagrgs() {
 		Evaluator eval = new Evaluator();
 		eval.addFunction(new VarArgFunction());
+		eval.parse("foo('1','2','3','4','5')");
 		@SuppressWarnings("unchecked")
-		FunctionElementArgument<String> result = (FunctionElementArgument<String>) eval.evaluate("foo('1','2','3','4','5')");
+		FunctionElementArgument<String> result = (FunctionElementArgument<String>) eval.evaluate();
 		AssertUtil.assertStringResult(result, "12345");
 	}
 	
@@ -21,8 +22,9 @@ public class VarArgTest {
 	public void varagrgsWithOtherFn() {
 		Evaluator eval = new Evaluator();
 		eval.addFunction(new VarArgFunction());
+		eval.parse("'AAA' + toUpperCase('xxx') + foo('1','2','3','4','5')");
 		@SuppressWarnings("unchecked")
-		FunctionElementArgument<String> result = (FunctionElementArgument<String>) eval.evaluate("'AAA' + toUpperCase('xxx') + foo('1','2','3','4','5')");
+		FunctionElementArgument<String> result = (FunctionElementArgument<String>) eval.evaluate();
 		AssertUtil.assertStringResult(result, "AAAXXX12345");
 	}
 	

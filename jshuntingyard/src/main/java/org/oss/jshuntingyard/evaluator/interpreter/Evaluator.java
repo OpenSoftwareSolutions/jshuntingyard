@@ -64,24 +64,14 @@ public class Evaluator {
 		parser.addFunctions(functions);
 	}	
 
-	/**
-	 * Evaluates last expression
-	 * @return
-	 */
+	public void parse(String evalExpression) {
+		expression = parser.infixToRPN(evalExpression);
+	}
+
 	public FunctionElementArgument<?> evaluate() {
 		if(expression == null || expression.isEmpty()){
 			throw new RuntimeException("There are no ExpressionElements in the List");
 		}
-		return evaluate(expression);
-	}
-
-	public FunctionElementArgument<?> evaluate(String evalExpression) {
-		expression = parser.infixToRPN(evalExpression);
-		return evaluate();
-	}
-
-	public FunctionElementArgument<?> evaluate(Expression expression) {
-
 		LinkedList<ExpressionElement> stack = new LinkedList<ExpressionElement>();
 		for (ExpressionElement element : expression) {
 			if (element instanceof FunctionElementArgument) {
