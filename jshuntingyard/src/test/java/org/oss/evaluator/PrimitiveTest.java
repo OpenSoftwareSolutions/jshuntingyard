@@ -27,6 +27,12 @@ public class PrimitiveTest {
 	}
 
 	@Test
+	public void basicOperatorsPrecedenceComplex() {
+		FunctionElementArgument<?> result = new Evaluator("(7 + 3 * 2 ^ 2 + 3) / 4").evaluate();
+		AssertUtil.assertDoubleResult(result,5.5);
+	}
+
+	@Test
 	public void basicOperatorsPrecedence() {
 		FunctionElementArgument<?> result = new Evaluator("1 + 2 * 3").evaluate();
 		AssertUtil.assertIntegerResult(result,7);

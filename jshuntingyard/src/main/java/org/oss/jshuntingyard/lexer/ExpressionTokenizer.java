@@ -39,7 +39,7 @@ public class ExpressionTokenizer{
 			m.region(pos, end);
 			for (ExpressionRule r : rules){
 				if (m.usePattern(r.pattern).lookingAt()){
-					tokens.add(new ExpressionToken(r.name, m.start(), m.end(), source));
+					tokens.add(new ExpressionToken(r.type, m.start(), m.end(), source));
 					pos = m.end()-1;
 					break;
 				}

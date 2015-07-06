@@ -19,23 +19,33 @@ import java.util.regex.Pattern;
 
 public class ExpressionRule {
 
-	final String name;
+	public enum TokenType {
+		FUNCTIONNAME,
+		DIGIT,
+		SINGLEQUOTED,
+		COMMA,
+		PARENTHESE,
+		OPERATOR,
+		VARIABLE
+	}
+	final TokenType type;
 	final Pattern pattern;
+	
 
-	public ExpressionRule(String name, String regex){
-		this.name = name;
+	public ExpressionRule(TokenType type, String regex){
+		this.type = type;
 		pattern = Pattern.compile(regex);
 	}
 
 	public static List<ExpressionRule> getJSHuntingYardRules(){
 		List<ExpressionRule> rules = new ArrayList<ExpressionRule>();
-		rules.add(new ExpressionRule("FUNCTIONNAME", "[A-Za-z]+([0-9])?"));
-		rules.add(new ExpressionRule("DIGIT", "([-])?([0-9]+(\\.\\d+)?)"));
-		rules.add(new ExpressionRule("SINGLEQUOTED", "\'[^\']*+\'"));
-		rules.add(new ExpressionRule("COMMA", ","));
-		rules.add(new ExpressionRule("PARENTHESE", "\\(|\\)"));
-		rules.add(new ExpressionRule("OPERATOR", "\\+|-|\\*|/|==|!=|\\^|\\%|\\|\\||<=|>=|<|>|&&|!"));
-		rules.add(new ExpressionRule("VARIABLE", "\\$([a-zA-Z0-9])+([_])?([a-zA-Z0-9])*"));
+		rules.add(new ExpressionRule(TokenType.FUNCTIONNAME, "[A-Za-z]+([0-9])?"));
+		rules.add(new ExpressionRule(TokenType.DIGIT, "([-])?([0-9]+(\\.\\d+)?)"));
+		rules.add(new ExpressionRule(TokenType.SINGLEQUOTED, "\'[^\']*+\'"));
+		rules.add(new ExpressionRule(TokenType.COMMA, ","));
+		rules.add(new ExpressionRule(TokenType.PARENTHESE, "\\(|\\)"));
+		rules.add(new ExpressionRule(TokenType.OPERATOR, "\\+|-|\\*|/|==|!=|\\^|\\%|\\|\\||<=|>=|<|>|&&|!"));
+		rules.add(new ExpressionRule(TokenType.VARIABLE, "\\$([a-zA-Z0-9])+([_])?([a-zA-Z0-9])*"));
 		return rules;
 	}
 }
