@@ -13,7 +13,6 @@
  */
 package org.oss.jshuntingyard.lexer;
 
-import org.oss.jshuntingyard.lexer.ExpressionRule.TokenType;
 
 public class ExpressionToken {
 

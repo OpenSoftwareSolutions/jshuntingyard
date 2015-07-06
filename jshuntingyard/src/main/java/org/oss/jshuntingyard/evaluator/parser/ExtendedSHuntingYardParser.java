@@ -25,10 +25,9 @@ import org.oss.jshuntingyard.evaluator.FunctionElement;
 import org.oss.jshuntingyard.evaluator.FunctionElement.Associativity;
 import org.oss.jshuntingyard.evaluator.interpreter.Expression;
 import org.oss.jshuntingyard.evaluator.interpreter.ExpressionElement;
-import org.oss.jshuntingyard.lexer.ExpressionRule;
-import org.oss.jshuntingyard.lexer.ExpressionRule.TokenType;
 import org.oss.jshuntingyard.lexer.ExpressionToken;
 import org.oss.jshuntingyard.lexer.ExpressionTokenizer;
+import org.oss.jshuntingyard.lexer.TokenType;
 
 /**
  * Shunting-yard algorithm
@@ -50,7 +49,7 @@ public class ExtendedSHuntingYardParser {
 	
 	public ExtendedSHuntingYardParser() {
 		this.functionElements = new HashMap<String, FunctionElement>();
-		addFunctions(ExpressionRule.getExpressionFunctions());
+		addFunctions(UserFunctions.get());
 	}
 
 	/**
@@ -136,7 +135,7 @@ public class ExtendedSHuntingYardParser {
 				} else if (token.getType()==TokenType.FUNCTIONNAME) {
 					FunctionElement function = functionElements.get(token.getToken());
 					if (function== null) {
-						System.out.println("foo");
+						throw new IllegalArgumentException("Unknown function: " + token.getToken());
 					}
 					int paramsStart = out.size();
 					out.addAll(infixToRPN(tokenIterator,true));
