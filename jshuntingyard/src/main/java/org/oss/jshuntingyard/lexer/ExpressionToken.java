@@ -32,16 +32,6 @@ public class ExpressionToken {
 	}
 
 
-	public int getStartPos() {
-		return startPos;
-	}
-
-
-	public int getEndPos() {
-		return endPos;
-	}
-
-
 	public String getToken() {
 		return token;
 	}
