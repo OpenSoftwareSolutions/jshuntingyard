@@ -15,6 +15,7 @@ package org.oss.jshuntingyard.evaluator.parser;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
@@ -241,20 +242,20 @@ public class ExtendedSHuntingYardParser {
 
 		//String[] tokens = TokenizerUtil.modifyExpression(expression).split(TokenizerUtil.DELIMITER);
 		List<ExpressionToken> tokens = ExpressionTokenizer.tokenize(expression);
-		return infixToRPN(ExpressionTokenizer.getTokenAsStringArray(tokens));
+		return infixToRPN(tokens.iterator());
 	}
 
-	public Expression infixToRPN(String[] inputTokens) {
+	public Expression infixToRPN(Iterator<ExpressionToken> tokenIterator) {
 		Expression out = new Expression();
 		Stack<ExpressionElement> stack = new Stack<ExpressionElement>();
 			// For all the input tokens [S1] read the next token [S2]
-			for (int tokenIndex = 0; tokenIndex<inputTokens.length;tokenIndex++) {
-				String token = inputTokens[tokenIndex];
-				if (isOperator(token)) {
-					FunctionElement operator = functionElements.get(token);
+			while (tokenIterator.hasNext()) {
+				ExpressionToken token = tokenIterator.next();
+				if (isOperator(token.getToken())) {
+					FunctionElement operator = functionElements.get(token.getToken());
 					if (operator.isUserFunction()) {
 						int paramsStart = out.size();
-						tokenIndex = new UserFunctionParser(out).parse(inputTokens,tokenIndex);
+						out.addAll(UserFunctionParser.parse(tokenIterator));
 						if (operator.getNumberOfParameters()==-1) {
 							operator = new VarArgFunctionElementWrapper(operator, out.size() - paramsStart);
 						}
@@ -275,16 +276,16 @@ public class ExtendedSHuntingYardParser {
 					}
 					// Push the new operator on the stack [S7]
 					stack.push(operator);
-				} else if (token.equals("(")) {
+				} else if (token.getToken().equals("(")) {
 					stack.push(new LeftParenthese()); 	// [S8]
-				} else if (token.equals(")")) {
+				} else if (token.getToken().equals(")")) {
 					// [S9]
 					while (!stack.empty() && !(stack.peek() instanceof LeftParenthese)) {
 						out.add(stack.pop()); // [S10]
 					}
 					stack.pop(); // [S11]
-				} else if (!token.isEmpty()){
-					out.add(FunctionArgumentFactory.createObject(token)); // [S12]
+				} else if (!token.getToken().isEmpty()){
+					out.add(FunctionArgumentFactory.createObject(token.getToken())); // [S12]
 				}
 			}
 			while (!stack.empty()) {
