@@ -24,8 +24,11 @@ public class ExpressionRule {
 		DIGIT,
 		SINGLEQUOTED,
 		COMMA,
+		NAN,
 		PARENTHESE,
 		OPERATOR,
+		BOOLEANVALUE,
+		NULL,
 		VARIABLE
 	}
 	final TokenType type;
@@ -39,6 +42,9 @@ public class ExpressionRule {
 
 	public static List<ExpressionRule> getJSHuntingYardRules(){
 		List<ExpressionRule> rules = new ArrayList<ExpressionRule>();
+		rules.add(new ExpressionRule(TokenType.BOOLEANVALUE, "false|true|False|True|FALSE|TRUE"));
+		rules.add(new ExpressionRule(TokenType.NULL, "null|Null|NULL"));
+		rules.add(new ExpressionRule(TokenType.NAN, "NaN"));
 		rules.add(new ExpressionRule(TokenType.FUNCTIONNAME, "[A-Za-z]+([0-9])?"));
 		rules.add(new ExpressionRule(TokenType.DIGIT, "([-])?([0-9]+(\\.\\d+)?)"));
 		rules.add(new ExpressionRule(TokenType.SINGLEQUOTED, "\'[^\']*+\'"));

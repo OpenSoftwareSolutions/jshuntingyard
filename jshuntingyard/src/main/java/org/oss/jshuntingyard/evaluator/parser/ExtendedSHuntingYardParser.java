@@ -80,6 +80,8 @@ import org.oss.jshuntingyard.evaluator.userfunction.string.StartsWith;
 import org.oss.jshuntingyard.evaluator.userfunction.string.Substring;
 import org.oss.jshuntingyard.evaluator.userfunction.string.ToLowerCase;
 import org.oss.jshuntingyard.evaluator.userfunction.string.ToUpperCase;
+import org.oss.jshuntingyard.lexer.ExpressionRule;
+import org.oss.jshuntingyard.lexer.ExpressionRule.TokenType;
 import org.oss.jshuntingyard.lexer.ExpressionToken;
 import org.oss.jshuntingyard.lexer.ExpressionTokenizer;
 
@@ -242,26 +244,31 @@ public class ExtendedSHuntingYardParser {
 
 		//String[] tokens = TokenizerUtil.modifyExpression(expression).split(TokenizerUtil.DELIMITER);
 		List<ExpressionToken> tokens = ExpressionTokenizer.tokenize(expression);
-		return infixToRPN(tokens.iterator());
+		return infixToRPN(tokens.iterator(),false);
 	}
 
-	public Expression infixToRPN(Iterator<ExpressionToken> tokenIterator) {
+	public Expression infixToRPN(Iterator<ExpressionToken> tokenIterator, boolean stopAtNextCloseBrace) {
 		Expression out = new Expression();
 		Stack<ExpressionElement> stack = new Stack<ExpressionElement>();
 			// For all the input tokens [S1] read the next token [S2]
 			while (tokenIterator.hasNext()) {
 				ExpressionToken token = tokenIterator.next();
-				if (isOperator(token.getToken())) {
-					FunctionElement operator = functionElements.get(token.getToken());
-					if (operator.isUserFunction()) {
-						int paramsStart = out.size();
-						out.addAll(UserFunctionParser.parse(tokenIterator));
-						if (operator.getNumberOfParameters()==-1) {
-							operator = new VarArgFunctionElementWrapper(operator, out.size() - paramsStart);
-						}
-						out.add(operator);
-						continue;
+				if (token.getType()==TokenType.COMMA) {
+					continue;
+				} else if (token.getType()==TokenType.FUNCTIONNAME) {
+					FunctionElement function = functionElements.get(token.getToken());
+					if (function== null) {
+						System.out.println("foo");
 					}
+					int paramsStart = out.size();
+					out.addAll(infixToRPN(tokenIterator,true));
+					if (function.getNumberOfParameters()==-1) {
+						function = new VarArgFunctionElementWrapper(function, out.size() - paramsStart);
+					}
+					out.add(function);
+					continue;
+				} else if (token.getType()==TokenType.OPERATOR) {
+					FunctionElement operator = functionElements.get(token.getToken());
 					// If token is an operator (x) [S3]
 					while (!stack.empty() && isFunctionElement(stack.peek())) {
 						// [S4]
@@ -279,6 +286,9 @@ public class ExtendedSHuntingYardParser {
 				} else if (token.getToken().equals("(")) {
 					stack.push(new LeftParenthese()); 	// [S8]
 				} else if (token.getToken().equals(")")) {
+					if (stopAtNextCloseBrace) {
+						return out;
+					}
 					// [S9]
 					while (!stack.empty() && !(stack.peek() instanceof LeftParenthese)) {
 						out.add(stack.pop()); // [S10]

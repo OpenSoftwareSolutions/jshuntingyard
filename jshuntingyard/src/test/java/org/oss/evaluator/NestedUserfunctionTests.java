@@ -15,7 +15,7 @@ public class NestedUserfunctionTests {
 		eval.addFunction(new UserFunctionB());
 		eval.parse("funcA('AA',funcB(': 1','2'))");
 		FunctionElementArgument<?> result = eval.evaluate();
-		AssertUtil.assertStringResult(result, "AA: 12");
+		AssertUtil.assertStringResult(result, "AA: 1-2");
 		
 	}
 	private static class UserFunctionA extends AbstractTwoArgFunctionElement<String, String, String> {
