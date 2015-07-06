@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 
 import net.sourceforge.jeval.EvaluationException;
 
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.oss.jshuntingyard.evaluator.DoubleArgument;
@@ -18,19 +17,15 @@ import org.oss.jshuntingyard.evaluator.interpreter.Evaluator;
 
 public class PerformanceTest {
 
+	private static Logger logger = Logger.getLogger(Evaluator.class.getName());
+
 	@BeforeClass
 	public static void before() {
-		// TODO neither following nor getGlobal has any effect
-		// TODO change log framework
-		Logger.getLogger(Evaluator.class.getName()).setLevel(Level.OFF);
+		logger.setLevel(Level.OFF);
+
+		//Logger.getLogger(Evaluator.class.getName()).setLevel(Level.OFF);
 	}
-	
-	@AfterClass
-	public static void after() {
-		// TODO seems not to work
-		Logger.getLogger(Evaluator.class.getName()).setLevel(Level.INFO);
-	}
-	
+
 	@Test
 	public void evaluatingSpeedJEval() throws EvaluationException {
 		net.sourceforge.jeval.Evaluator evaluator = new net.sourceforge.jeval.Evaluator();
