@@ -25,61 +25,6 @@ import org.oss.jshuntingyard.evaluator.FunctionElement;
 import org.oss.jshuntingyard.evaluator.FunctionElement.Associativity;
 import org.oss.jshuntingyard.evaluator.interpreter.Expression;
 import org.oss.jshuntingyard.evaluator.interpreter.ExpressionElement;
-import org.oss.jshuntingyard.evaluator.operator.logic.AndOperator;
-import org.oss.jshuntingyard.evaluator.operator.logic.NotOperator;
-import org.oss.jshuntingyard.evaluator.operator.logic.OrOperator;
-import org.oss.jshuntingyard.evaluator.operator.primitive.Add;
-import org.oss.jshuntingyard.evaluator.operator.primitive.Divide;
-import org.oss.jshuntingyard.evaluator.operator.primitive.Modulo;
-import org.oss.jshuntingyard.evaluator.operator.primitive.Multiply;
-import org.oss.jshuntingyard.evaluator.operator.primitive.Power;
-import org.oss.jshuntingyard.evaluator.operator.primitive.Subtract;
-import org.oss.jshuntingyard.evaluator.operator.relational.EqualTo;
-import org.oss.jshuntingyard.evaluator.operator.relational.GreaterThan;
-import org.oss.jshuntingyard.evaluator.operator.relational.GreaterThanOrEqualTo;
-import org.oss.jshuntingyard.evaluator.operator.relational.LessThan;
-import org.oss.jshuntingyard.evaluator.operator.relational.LessThanOrEqualTo;
-import org.oss.jshuntingyard.evaluator.operator.relational.NotEqualTo;
-import org.oss.jshuntingyard.evaluator.userfunction.math.Abs;
-import org.oss.jshuntingyard.evaluator.userfunction.math.Acos;
-import org.oss.jshuntingyard.evaluator.userfunction.math.Asin;
-import org.oss.jshuntingyard.evaluator.userfunction.math.Atan;
-import org.oss.jshuntingyard.evaluator.userfunction.math.Atan2;
-import org.oss.jshuntingyard.evaluator.userfunction.math.Ceil;
-import org.oss.jshuntingyard.evaluator.userfunction.math.Cos;
-import org.oss.jshuntingyard.evaluator.userfunction.math.Exp;
-import org.oss.jshuntingyard.evaluator.userfunction.math.Floor;
-import org.oss.jshuntingyard.evaluator.userfunction.math.IEEEremainder;
-import org.oss.jshuntingyard.evaluator.userfunction.math.Log;
-import org.oss.jshuntingyard.evaluator.userfunction.math.Max;
-import org.oss.jshuntingyard.evaluator.userfunction.math.Min;
-import org.oss.jshuntingyard.evaluator.userfunction.math.Random;
-import org.oss.jshuntingyard.evaluator.userfunction.math.Rint;
-import org.oss.jshuntingyard.evaluator.userfunction.math.Round;
-import org.oss.jshuntingyard.evaluator.userfunction.math.Sin;
-import org.oss.jshuntingyard.evaluator.userfunction.math.Sqrt;
-import org.oss.jshuntingyard.evaluator.userfunction.math.Tan;
-import org.oss.jshuntingyard.evaluator.userfunction.math.ToDegrees;
-import org.oss.jshuntingyard.evaluator.userfunction.math.ToRadians;
-import org.oss.jshuntingyard.evaluator.userfunction.string.CharAt;
-import org.oss.jshuntingyard.evaluator.userfunction.string.CompareTo;
-import org.oss.jshuntingyard.evaluator.userfunction.string.CompareToIgnoreCase;
-import org.oss.jshuntingyard.evaluator.userfunction.string.Concat;
-import org.oss.jshuntingyard.evaluator.userfunction.string.Contains;
-import org.oss.jshuntingyard.evaluator.userfunction.string.EndsWith;
-import org.oss.jshuntingyard.evaluator.userfunction.string.Equals;
-import org.oss.jshuntingyard.evaluator.userfunction.string.EqualsIgnoreCase;
-import org.oss.jshuntingyard.evaluator.userfunction.string.IndexOf;
-import org.oss.jshuntingyard.evaluator.userfunction.string.LastIndexOf;
-import org.oss.jshuntingyard.evaluator.userfunction.string.Length;
-import org.oss.jshuntingyard.evaluator.userfunction.string.Like;
-import org.oss.jshuntingyard.evaluator.userfunction.string.Matches;
-import org.oss.jshuntingyard.evaluator.userfunction.string.NumberFormat;
-import org.oss.jshuntingyard.evaluator.userfunction.string.Replace;
-import org.oss.jshuntingyard.evaluator.userfunction.string.StartsWith;
-import org.oss.jshuntingyard.evaluator.userfunction.string.Substring;
-import org.oss.jshuntingyard.evaluator.userfunction.string.ToLowerCase;
-import org.oss.jshuntingyard.evaluator.userfunction.string.ToUpperCase;
 import org.oss.jshuntingyard.lexer.ExpressionRule;
 import org.oss.jshuntingyard.lexer.ExpressionRule.TokenType;
 import org.oss.jshuntingyard.lexer.ExpressionToken;
@@ -102,69 +47,10 @@ import org.oss.jshuntingyard.lexer.ExpressionTokenizer;
 public class ExtendedSHuntingYardParser {
 
 	private final Map<String,FunctionElement> functionElements;
+	
 	public ExtendedSHuntingYardParser() {
-		functionElements = new HashMap<String, FunctionElement>();
-		// Primitiv
-		addFunction(new Add());
-		addFunction(new Subtract());
-		addFunction(new Multiply());
-		addFunction(new Divide());
-		addFunction(new Power());
-		addFunction(new Modulo());
-		// Math
-		addFunction(new Round());
-		addFunction(new Max());
-		addFunction(new Min());
-		addFunction(new Abs());
-		addFunction(new Acos());
-		addFunction(new Cos());
-		addFunction(new Asin());
-		addFunction(new Atan());
-		addFunction(new Atan2());
-		addFunction(new Ceil());
-		addFunction(new Exp());
-		addFunction(new Floor());
-		addFunction(new IEEEremainder());
-		addFunction(new Log());
-		addFunction(new Random());
-		addFunction(new Rint());
-		addFunction(new Sin());
-		addFunction(new Sqrt());
-		addFunction(new Tan());
-		addFunction(new ToDegrees());
-		addFunction(new ToRadians());
-
-		// Relational
-		addFunction(new EqualTo());
-		addFunction(new NotEqualTo());
-		addFunction(new LessThan());
-		addFunction(new GreaterThan());
-		addFunction(new LessThanOrEqualTo());
-		addFunction(new GreaterThanOrEqualTo());
-		// Logic
-		addFunction(new AndOperator());
-		addFunction(new OrOperator());
-		addFunction(new NotOperator());
-		// String
-		addFunction(new Length());
-		addFunction(new Substring());
-		addFunction(new CharAt());
-		addFunction(new CompareTo());
-		addFunction(new CompareToIgnoreCase());
-		addFunction(new Equals());
-		addFunction(new EqualsIgnoreCase());
-		addFunction(new Concat());
-		addFunction(new Contains());
-		addFunction(new EndsWith());
-		addFunction(new StartsWith());
-		addFunction(new Replace());
-		addFunction(new ToUpperCase());
-		addFunction(new ToLowerCase());
-		addFunction(new IndexOf());
-		addFunction(new LastIndexOf());
-		addFunction(new Like());
-		addFunction(new Matches());
-		addFunction(new NumberFormat());
+		this.functionElements = new HashMap<String, FunctionElement>();
+		addFunctions(ExpressionRule.getExpressionFunctions());
 	}
 
 	/**
@@ -185,14 +71,6 @@ public class ExtendedSHuntingYardParser {
 		}
 	}
 
-	/**
-	 * Test if a certain is an operator .
-	 * @param token The token to be tested .
-	 * @return True if token is an operator . Otherwise False .
-	 */
-	private boolean isOperator(String token) {
-		return functionElements.containsKey(token);
-	}
 	/**
 	 * Test if a certain is an function element .
 	 * @param token The token to be tested .
@@ -283,9 +161,9 @@ public class ExtendedSHuntingYardParser {
 					}
 					// Push the new operator on the stack [S7]
 					stack.push(operator);
-				} else if (token.getToken().equals("(")) {
+				} else if (token.getType()==TokenType.OPENBRACE) {
 					stack.push(new LeftParenthese()); 	// [S8]
-				} else if (token.getToken().equals(")")) {
+				} else if (token.getType()==TokenType.CLOSEBRACE) {
 					if (stopAtNextCloseBrace) {
 						return out;
 					}
