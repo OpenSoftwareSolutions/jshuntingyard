@@ -22,8 +22,6 @@ public class PerformanceTest {
 	@BeforeClass
 	public static void before() {
 		logger.setLevel(Level.OFF);
-
-		//Logger.getLogger(Evaluator.class.getName()).setLevel(Level.OFF);
 	}
 
 	@Test
