@@ -79,6 +79,21 @@ public class VariableTest {
 		FunctionElementArgument<?> result = evaluator.evaluate();
 		AssertUtil.assertDoubleResult(result,22.89);
 	}
+	
+	@Test
+	public void variablesWithMultipleUnderscoresAndLetters() {
+		Evaluator evaluator = new Evaluator("max ( $V_ROW_COUNT , $2 )");
+		MyVar var1 = new MyVar();
+		var1.name = "V_ROW_COUNT";
+		var1.value = 2.3456;
+		MyVar var2 = new MyVar();
+		var2.name = "2";
+		var2.value=22.89;
+		evaluator.bindVariable(var2);
+		evaluator.bindVariable(var1);
+		FunctionElementArgument<?> result = evaluator.evaluate();
+		AssertUtil.assertDoubleResult(result,22.89);
+	}
 	@Test
 	public void variablesConcatenating() {
 		Evaluator evaluator = new Evaluator("'hallo ' + $1");
