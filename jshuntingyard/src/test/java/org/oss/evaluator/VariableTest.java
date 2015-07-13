@@ -94,6 +94,8 @@ public class VariableTest {
 		FunctionElementArgument<?> result = evaluator.evaluate();
 		AssertUtil.assertDoubleResult(result,22.89);
 	}
+	
+	
 	@Test
 	public void variablesConcatenating() {
 		Evaluator evaluator = new Evaluator("'hallo ' + $1");
@@ -103,6 +105,28 @@ public class VariableTest {
 		evaluator.bindVariable(var1);
 		FunctionElementArgument<?> result = evaluator.evaluate();
 		AssertUtil.assertStringResult(result,"hallo welt");
+	}
+	
+	@Test
+	public void variablesConcatenatingInt() {
+		Evaluator evaluator = new Evaluator("'hallo ' + $1");
+		MyVar var1 = new MyVar();
+		var1.name = "1";
+		var1.value = new Integer(1);
+		evaluator.bindVariable(var1);
+		FunctionElementArgument<?> result = evaluator.evaluate();
+		AssertUtil.assertStringResult(result,"hallo 1");
+	}
+	
+	@Test
+	public void variablesConcatenatingIntParanthesis() {
+		Evaluator evaluator = new Evaluator("'hallo ' + '$1'");
+		MyVar var1 = new MyVar();
+		var1.name = "1";
+		var1.value = new Integer(1);
+		evaluator.bindVariable(var1);
+		FunctionElementArgument<?> result = evaluator.evaluate();
+		AssertUtil.assertStringResult(result,"hallo 1");
 	}
 	@Test
 	public void variablesAdd() {
