@@ -13,7 +13,7 @@ public enum TokenType {
 	OPENBRACE("\\("),
 	CLOSEBRACE("\\)"),
 	OPERATOR("\\+|-|\\*|/|==|!=|\\^|\\%|\\|\\||<=|>=|<|>|&&|!"),
-	VARIABLE("\\$([a-zA-Z0-9])+([_])?([a-zA-Z0-9])*");
+	VARIABLE("\\$([a-zA-Z0-9])+(([_])?([a-zA-Z0-9])*)*");
 
 	private final Pattern pattern;
 
