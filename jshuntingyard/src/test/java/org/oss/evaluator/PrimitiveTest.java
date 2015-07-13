@@ -123,9 +123,10 @@ public class PrimitiveTest {
 		AssertUtil.assertDoubleResult(result,10.3);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void basicAddDoubleString() {
-		new Evaluator("8.0 + '2.0'").evaluate();
+		FunctionElementArgument<?> result =  new Evaluator("8.0 + '2.0'").evaluate();
+		AssertUtil.assertStringResult(result,"8.02.0");
 	}
 
 }
