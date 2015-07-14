@@ -91,26 +91,26 @@ public class PrimitiveTest {
 		FunctionElementArgument<?> result = new Evaluator("'8' + '2'").evaluate();
 		AssertUtil.assertStringResult(result,"82");
 	}
-	
+
 	@Test
 	public void basicDivideIntDouble() {
 		FunctionElementArgument<?> result = new Evaluator("10 / 2.5").evaluate();
 		AssertUtil.assertDoubleResult(result,4.0);
 	}
-	
+
 	@Test
 	public void basicMultiplyIntDouble() {
 		FunctionElementArgument<?> result = new Evaluator("10 * 2.5").evaluate();
 		AssertUtil.assertDoubleResult(result,25.0);
 	}
-	
+
 	@Test
 	public void basicMultiplyDoubleInt() {
 		FunctionElementArgument<?> result = new Evaluator("4.3 * 2").evaluate();
 		AssertUtil.assertDoubleResult(result,8.6);
 	}
-	
-	
+
+
 	@Test
 	public void basicDivideDoubleInt() {
 		FunctionElementArgument<?> result = new Evaluator("7.5 / 3").evaluate();
@@ -127,6 +127,12 @@ public class PrimitiveTest {
 	public void basicAddDoubleString() {
 		FunctionElementArgument<?> result =  new Evaluator("8.0 + '2.0'").evaluate();
 		AssertUtil.assertStringResult(result,"8.02.0");
+	}
+
+	@Test
+	public void basicAddIntString() {
+		FunctionElementArgument<?> result =  new Evaluator("'8.0' + 2").evaluate();
+		AssertUtil.assertStringResult(result,"8.02");
 	}
 
 }
