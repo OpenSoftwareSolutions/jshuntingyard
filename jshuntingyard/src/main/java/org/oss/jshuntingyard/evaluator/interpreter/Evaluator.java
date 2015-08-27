@@ -14,6 +14,7 @@
 package org.oss.jshuntingyard.evaluator.interpreter;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -130,6 +131,12 @@ public class Evaluator {
 		}
 		if (value instanceof Double) {
 			return FunctionArgumentFactory.createObject((Double) value);
+		}
+		if (value instanceof Long) {
+			return FunctionArgumentFactory.createObject((Long) value);
+		}
+		if (value instanceof Date) {
+			return FunctionArgumentFactory.createObject((Date) value);
 		}
 		if (value instanceof String) {
 			return FunctionArgumentFactory.createString((String) value);
