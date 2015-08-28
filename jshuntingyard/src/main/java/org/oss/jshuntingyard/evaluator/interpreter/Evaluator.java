@@ -129,11 +129,14 @@ public class Evaluator {
 		if (value instanceof Integer) {
 			return FunctionArgumentFactory.createObject((Integer) value);
 		}
-		if (value instanceof Double) {
-			return FunctionArgumentFactory.createObject((Double) value);
-		}
 		if (value instanceof Long) {
 			return FunctionArgumentFactory.createObject((Long) value);
+		}
+		if (value instanceof Float) {
+			return FunctionArgumentFactory.createObject((Float) value);
+		}
+		if (value instanceof Double) {
+			return FunctionArgumentFactory.createObject((Double) value);
 		}
 		if (value instanceof Date) {
 			return FunctionArgumentFactory.createObject((Date) value);
