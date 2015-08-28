@@ -15,7 +15,7 @@ public abstract class AbstractTwoArgNumericFunctionElement extends AbstractFunct
 		if (isNumeric(args) || isOneString(args)) {
 			return execute(args[0],args[1]);
 		}
-		throw new IllegalArgumentException(String.format("Two string operands or two numeric operands are allowed but not ", args[0].getType() + " and " + args[1].getType()));
+		throw new IllegalArgumentException("Two string operands or two numeric operands are allowed but not " + args[0].getType() + " and " + args[1].getType());
 	}
 
 	abstract protected FunctionElementArgument<?> execute(FunctionElementArgument<?> a, FunctionElementArgument<?> b) throws IllegalArgumentException;

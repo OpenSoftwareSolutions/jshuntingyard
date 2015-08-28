@@ -55,6 +55,10 @@ public class FunctionArgumentFactory {
 		return new DoubleArgument(value);
 	}
 
+	public static FunctionElementArgument<Float> createObject(Float value) {
+		return new FloatArgument(value);
+	}
+
 	public static FunctionElementArgument<Long> createObject(Long value) {
 		return new LongArgument(value);
 	}
