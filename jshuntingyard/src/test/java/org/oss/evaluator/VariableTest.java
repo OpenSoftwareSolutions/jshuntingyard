@@ -118,16 +118,17 @@ public class VariableTest {
 		AssertUtil.assertStringResult(result,"hallo 1");
 	}
 	
-	@Test
-	public void variablesConcatenatingIntParanthesis() {
-		Evaluator evaluator = new Evaluator("'hallo ' + '$1'");
-		MyVar var1 = new MyVar();
-		var1.name = "1";
-		var1.value = new Integer(1);
-		evaluator.bindVariable(var1);
-		FunctionElementArgument<?> result = evaluator.evaluate();
-		AssertUtil.assertStringResult(result,"hallo 1");
-	}
+// TODO variables names in Strings should not be resolved perhaps an escape for ' and " is required	
+//	@Test
+//	public void variablesConcatenatingIntParanthesis() {
+//		Evaluator evaluator = new Evaluator("'hallo ' + '$1'");
+//		MyVar var1 = new MyVar();
+//		var1.name = "1";
+//		var1.value = new Integer(1);
+//		evaluator.bindVariable(var1);
+//		FunctionElementArgument<?> result = evaluator.evaluate();
+//		AssertUtil.assertStringResult(result,"hallo 1");
+//	}
 	@Test
 	public void variablesAdd() {
 		Evaluator evaluator = new Evaluator("2 + $1");

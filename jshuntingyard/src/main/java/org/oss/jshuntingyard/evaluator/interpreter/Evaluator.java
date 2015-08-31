@@ -82,6 +82,9 @@ public class Evaluator {
 				int numArgs = function.getNumberOfParameters();
 				FunctionElementArgument<?> args[] = new FunctionElementArgument<?>[numArgs];
 				for (int i=0;i<numArgs;i++) {
+					if (stack.isEmpty()) {
+						throw new IllegalArgumentException("The function: " + function.getName() + " expects " + numArgs + " parameters");
+					}
 					ExpressionElement arg = stack.pop();
 					if (arg instanceof FunctionElementArgument) {
 						int argIndex = numArgs -1 - i;

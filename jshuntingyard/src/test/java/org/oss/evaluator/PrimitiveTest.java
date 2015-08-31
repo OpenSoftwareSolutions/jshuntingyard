@@ -23,13 +23,15 @@ public class PrimitiveTest {
 	@Test
 	public void basicOperatorsCalc() {
 		FunctionElementArgument<?> result = new Evaluator("( 1 + 2 ) * ( 3 / 4.0 ) ^ ( 5 + 6 )").evaluate();
-		AssertUtil.assertDoubleResult(result,0.12670540809631348);
+		double expected = ( 1 + 2 ) * Math.pow( ( 3 / 4.0 ) , ( 5 + 6 ));
+		AssertUtil.assertDoubleResult(result,expected);
 	}
 
 	@Test
 	public void basicOperatorsPrecedenceComplex() {
 		FunctionElementArgument<?> result = new Evaluator("(7 + 3 * 2 ^ 2 + 3) / 4.0").evaluate();
-		AssertUtil.assertDoubleResult(result,5.5);
+		double expected = (7 + 3 * Math.pow(2 , 2) + 3) / 4.0;
+		AssertUtil.assertDoubleResult(result,expected);
 	}
 
 	@Test
@@ -46,30 +48,30 @@ public class PrimitiveTest {
 	
 	@Test
 	public void integerDivision() {
-		System.out.println(5/2);
 		FunctionElementArgument<?> result = new Evaluator("5 / 2").evaluate();
-		AssertUtil.assertIntegerResult(result,2);
+		int expected = 5 / 2;
+		AssertUtil.assertIntegerResult(result,expected);
 	}
 
 	@Test
 	public void longDivision() {
-		System.out.println(5/2l);
 		FunctionElementArgument<?> result = new Evaluator("5 / 2l").evaluate();
-		AssertUtil.assertLongResult(result,2l);
+		long expected = 5 / 2l;
+		AssertUtil.assertLongResult(result,expected);
 	}
 
 	@Test
 	public void doubleDivision() {
-		System.out.println(5/2.0);
 		FunctionElementArgument<?> result = new Evaluator("5 / 2.0").evaluate();
-		AssertUtil.assertDoubleResult(result,2.5);
+		double expected = 5 / 2.0;
+		AssertUtil.assertDoubleResult(result,expected);
 	}
 
 	@Test
 	public void floatDivision() {
-		System.out.println(5/2.0f);
 		FunctionElementArgument<?> result = new Evaluator("5 / 2.0f").evaluate();
-		AssertUtil.assertFloatResult(result,2.5f);
+		float expected = 5 / 2.0f;
+		AssertUtil.assertFloatResult(result,expected);
 	}
 
 	@Test
