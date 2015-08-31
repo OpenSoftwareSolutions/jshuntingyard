@@ -281,4 +281,12 @@ public class MathTest {
 		FunctionElementArgument<?> result = new Evaluator("toRadians ( -180.0 )").evaluate();
 		AssertUtil.assertDoubleResult(result,-3.141592653589793);
 	}
+	
+	@Test
+	public void expressionAsUserFunctionParameter() {
+		FunctionElementArgument<?> result = new Evaluator("max(10 / 2 * 3, 12)").evaluate();
+		AssertUtil.assertStringResult(result, "15");
+	}
+
+	
 }
