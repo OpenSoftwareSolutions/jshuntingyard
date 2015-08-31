@@ -172,7 +172,7 @@ public class ExtendedSHuntingYardParser {
 					}
 					stack.pop(); // [S11]
 				} else if (!token.getToken().isEmpty()){
-					out.add(FunctionArgumentFactory.createObject(token.getToken())); // [S12]
+					out.add(FunctionArgumentFactory.createObject(token)); // [S12]
 				}
 			}
 			while (!stack.empty()) {

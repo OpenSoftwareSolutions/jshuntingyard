@@ -39,14 +39,14 @@ public class PerformanceTest {
 		net.sourceforge.jeval.Evaluator evaluator = new net.sourceforge.jeval.Evaluator();
 		long t = System.currentTimeMillis();
 		for (int i=0;i<10000;i++){
-			assertEquals("0.12670540809631348", evaluator.evaluate("( 1 + 2 ) * pow(( 3 / 4 ) , ( 5 + 6 ))"));
+			assertEquals("0.12670540809631348", evaluator.evaluate("( 1 + 2 ) * pow(( 3 / 4.0 ) , ( 5 + 6 ))"));
 		}
 		System.out.println("JEval with parsing separated from evaluation, time elapsed within " + (System.currentTimeMillis() -t) + " ms");
 	}
 
 	@Test
 	public void evaluatingSpeed() {
-		Evaluator eval = new Evaluator("( 1 + 2 ) * ( 3 / 4 ) ^ ( 5 + 6 )");
+		Evaluator eval = new Evaluator("( 1 + 2 ) * ( 3 / 4.0 ) ^ ( 5 + 6 )");
 		long t = System.currentTimeMillis();
 		for (int i=0;i<10000;i++){
 			FunctionElementArgument<?> result = eval.evaluate();
@@ -59,7 +59,7 @@ public class PerformanceTest {
 		Evaluator eval = new Evaluator();
 		long t = System.currentTimeMillis();
 		for (int i=0;i<10000;i++){
-			eval.parse("( 1 + 2 ) * ( 3 / 4 ) ^ ( 5 + 6 )");
+			eval.parse("( 1 + 2 ) * ( 3 / 4.0 ) ^ ( 5 + 6 )");
 			FunctionElementArgument<?> result = eval.evaluate();
 			assertDoubleResult(result,0.12670540809631348);
 		}

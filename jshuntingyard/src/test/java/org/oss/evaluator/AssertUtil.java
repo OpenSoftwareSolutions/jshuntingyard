@@ -15,10 +15,15 @@ package org.oss.evaluator;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.Date;
+
 import org.oss.jshuntingyard.evaluator.BooleanArgument;
+import org.oss.jshuntingyard.evaluator.DateArgument;
 import org.oss.jshuntingyard.evaluator.DoubleArgument;
+import org.oss.jshuntingyard.evaluator.FloatArgument;
 import org.oss.jshuntingyard.evaluator.FunctionElementArgument;
 import org.oss.jshuntingyard.evaluator.IntegerArgument;
+import org.oss.jshuntingyard.evaluator.LongArgument;
 import org.oss.jshuntingyard.evaluator.StringArgument;
 
 public class AssertUtil {
@@ -40,10 +45,28 @@ public class AssertUtil {
 		assertTrue("Value of " + expected + " expected and not " + doubleResult ,doubleResult.getValue().equals(expected));
 	}
 
+	static void assertFloatResult(FunctionElementArgument<?> result, Float expected) {
+		assertTrue("FloatArgument expected and not " + result.getClass().getSimpleName(),result instanceof FloatArgument);
+		FloatArgument floatResult = (FloatArgument) result;
+		assertTrue("Value of " + expected + " expected and not " + floatResult ,floatResult.getValue().equals(expected));
+	}
+
 	static void assertIntegerResult(FunctionElementArgument<?> result, Integer expected) {
 		assertTrue("IntegerArgument expected and not " + result.getClass().getSimpleName(),result instanceof IntegerArgument);
 		IntegerArgument integerResult = (IntegerArgument) result;
 		assertTrue("Value of " + expected + " expected and not " + integerResult ,integerResult.getValue().equals(expected));
+	}
+
+	static void assertLongResult(FunctionElementArgument<?> result, Long expected) {
+		assertTrue("LongArgument expected and not " + result.getClass().getSimpleName(),result instanceof LongArgument);
+		LongArgument longResult = (LongArgument) result;
+		assertTrue("Value of " + expected + " expected and not " + longResult ,longResult.getValue().equals(expected));
+	}
+
+	static void assertDateResult(FunctionElementArgument<?> result, Date expected) {
+		assertTrue("DateArgument expected and not " + result.getClass().getSimpleName(),result instanceof DateArgument);
+		DateArgument dateResult = (DateArgument) result;
+		assertTrue("Value of " + expected + " expected and not " + dateResult ,dateResult.getValue().equals(expected));
 	}
 
 	static void assertStringResult(FunctionElementArgument<?> result, String expected) {

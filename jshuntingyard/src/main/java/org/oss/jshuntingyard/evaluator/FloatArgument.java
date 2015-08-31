@@ -24,7 +24,7 @@ public class FloatArgument extends AbstractFunctionElementArgument<Float> implem
 
 	@Override
 	public FunctionElementArgument.ArgumentType getType() {
-		return FunctionElementArgument.ArgumentType.DOUBLE;
+		return FunctionElementArgument.ArgumentType.FLOAT;
 	}
 
 	@Override

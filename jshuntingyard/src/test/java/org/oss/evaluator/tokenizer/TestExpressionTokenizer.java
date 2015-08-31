@@ -39,6 +39,9 @@ public class TestExpressionTokenizer{
     expressions.add("2.2929 - 3.49494");
     expressions.add("$22 - $3A");
     expressions.add("'22' != '3A'");
+    expressions.add("2.0d");
+    expressions.add("2");
+    expressions.add("2L");
 
 
     for(String expression : expressions){
