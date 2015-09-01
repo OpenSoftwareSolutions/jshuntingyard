@@ -171,8 +171,12 @@ public class ExtendedSHuntingYardParser {
 					}
 					stack.push(new LeftParenthese()); 	// [S8]
 				} else if (token.getType()==TokenType.CLOSEBRACE) {
-					if (closingBraceCountToExit!=-1) {
+					if (closingBraceCountToExit!=-1) { // userfunction mode: empty stack for last parameter
 						if (closingBraceCountToExit == 1) {
+							while (!stack.empty() && !(stack.peek() instanceof LeftParenthese)) {
+								out.add(stack.pop()); // [S10]
+							}
+							stack.pop(); // [S11]
 							return out;
 						} else {
 							closingBraceCountToExit--;

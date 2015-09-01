@@ -289,8 +289,14 @@ public class MathTest {
 	}
 
 	@Test
-	public void expressionWithBracesAsUserFunctionParameter() {
+	public void expressionWithBracesAsAUserFunctionParameter() {
 		FunctionElementArgument<?> result = new Evaluator("max(4 * (2 + 3), 16)").evaluate();
+		AssertUtil.assertIntegerResult(result, 20);
+	}
+
+	@Test
+	public void expressionWithBracesAsLastUserFunctionParameter() {
+		FunctionElementArgument<?> result = new Evaluator("max(16,4 * (2 + 3))").evaluate();
 		AssertUtil.assertIntegerResult(result, 20);
 	}
 
