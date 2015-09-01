@@ -285,7 +285,43 @@ public class MathTest {
 	@Test
 	public void expressionAsUserFunctionParameter() {
 		FunctionElementArgument<?> result = new Evaluator("max(10 / 2 * 3, 12)").evaluate();
-		AssertUtil.assertStringResult(result, "15");
+		AssertUtil.assertIntegerResult(result, 15);
+	}
+
+	@Test
+	public void expressionWithBracesAsUserFunctionParameter() {
+		FunctionElementArgument<?> result = new Evaluator("max(4 * (2 + 3), 16)").evaluate();
+		AssertUtil.assertIntegerResult(result, 20);
+	}
+
+	@Test
+	public void complexExpressionAsUserFunctionParameter() {
+		FunctionElementArgument<?> result = new Evaluator("max(4 * (2 + 3), min(36 / (10 - 4), 50))").evaluate();
+		AssertUtil.assertIntegerResult(result, 20);
+	}
+
+	@Test
+	public void signOonly() {
+		FunctionElementArgument<?> result = new Evaluator("-4").evaluate();
+		AssertUtil.assertIntegerResult(result, -4);
+	}
+
+	@Test
+	public void invalidOperator() {
+		FunctionElementArgument<?> result = new Evaluator("- 4").evaluate();
+		AssertUtil.assertIntegerResult(result, - 4);
+	}
+
+	@Test
+	public void signAndOperatorPlus() {
+		FunctionElementArgument<?> result = new Evaluator("0 + -4").evaluate();
+		AssertUtil.assertIntegerResult(result, 0 + -4);
+	}
+
+	@Test
+	public void signAndOperatorMinus() {
+		FunctionElementArgument<?> result = new Evaluator("0 - +4").evaluate();
+		AssertUtil.assertIntegerResult(result, 0 - +4);
 	}
 
 	
