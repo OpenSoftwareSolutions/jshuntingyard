@@ -330,5 +330,29 @@ public class MathTest {
 		AssertUtil.assertIntegerResult(result, 0 - +4);
 	}
 
+	@Test
+	public void castDouble() {
+		FunctionElementArgument<?> result = new Evaluator("(double)2.0f").evaluate();
+		AssertUtil.assertDoubleResult(result,2.0);
+	}
+
+	@Test
+	public void castFloat() {
+		FunctionElementArgument<?> result = new Evaluator("(float)16").evaluate();
+		AssertUtil.assertFloatResult(result,16.0f);
+	}
+
+	@Test
+	public void castLong() {
+		FunctionElementArgument<?> result = new Evaluator("(long)9.6").evaluate();
+		AssertUtil.assertLongResult(result,9l);
+	}
+
+	@Test
+	public void castInt() {
+		FunctionElementArgument<?> result = new Evaluator("(int)4.3").evaluate();
+		AssertUtil.assertIntegerResult(result,4);
+	}
+
 	
 }
