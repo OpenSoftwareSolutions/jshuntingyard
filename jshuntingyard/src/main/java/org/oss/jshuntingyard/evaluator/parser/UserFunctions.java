@@ -84,10 +84,14 @@ public class UserFunctions {
 	public static Collection<FunctionElement> get() {
 		Collection<FunctionElement>  functions = new ArrayList<FunctionElement>();
 		// Cast
-		functions.add(new IntCast());
-		functions.add(new LongCast());
-		functions.add(new FloatCast());
-		functions.add(new DoubleCast());
+		functions.add(new IntCast(false));
+		functions.add(new LongCast(false));
+		functions.add(new FloatCast(false));
+		functions.add(new DoubleCast(false));
+		functions.add(new IntCast(true));
+		functions.add(new LongCast(true));
+		functions.add(new FloatCast(true));
+		functions.add(new DoubleCast(true));
 		// Primitiv
 		functions.add(new Add());
 		functions.add(new Subtract());

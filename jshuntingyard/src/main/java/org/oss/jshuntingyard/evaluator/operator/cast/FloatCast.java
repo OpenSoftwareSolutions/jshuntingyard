@@ -18,13 +18,8 @@ import org.oss.jshuntingyard.evaluator.FunctionElementArgument;
 
 public class FloatCast extends AbstractOneArgNumericFunctionElement<Float> {
 
-	public FloatCast() {
-		super("(float)", Precedence.UNARY);
-	}
-
-	@Override
-	public boolean isUserFunction() {
-		return false;
+	public FloatCast(boolean doResultCast) {
+		super(getName(doResultCast,"(float)"), getPrecedence(doResultCast));
 	}
 
 	@Override

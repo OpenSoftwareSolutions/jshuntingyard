@@ -18,13 +18,8 @@ import org.oss.jshuntingyard.evaluator.FunctionElementArgument;
 
 public class IntCast extends AbstractOneArgNumericFunctionElement<Integer> {
 
-	public IntCast() {
-		super("(int)", Precedence.UNARY);
-	}
-
-	@Override
-	public boolean isUserFunction() {
-		return false;
+	public IntCast(boolean doResultCast) {
+		super(getName(doResultCast,"(int)"), getPrecedence(doResultCast));
 	}
 
 	@Override

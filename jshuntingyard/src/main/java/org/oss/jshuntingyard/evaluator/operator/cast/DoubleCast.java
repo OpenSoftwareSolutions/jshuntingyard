@@ -18,13 +18,8 @@ import org.oss.jshuntingyard.evaluator.FunctionElementArgument;
 
 public class DoubleCast extends AbstractOneArgNumericFunctionElement<Double> {
 
-	public DoubleCast() {
-		super("(double)", Precedence.UNARY);
-	}
-
-	@Override
-	public boolean isUserFunction() {
-		return false;
+	public DoubleCast(boolean doResultCast) {
+		super(getName(doResultCast,"(double)"), getPrecedence(doResultCast));
 	}
 
 	@Override

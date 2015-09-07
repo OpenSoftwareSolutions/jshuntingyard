@@ -18,13 +18,8 @@ import org.oss.jshuntingyard.evaluator.FunctionElementArgument;
 
 public class LongCast extends AbstractOneArgNumericFunctionElement<Long> {
 
-	public LongCast() {
-		super("(long)", Precedence.UNARY);
-	}
-
-	@Override
-	public boolean isUserFunction() {
-		return false;
+	public LongCast(boolean doResultCast) {
+		super(getName(doResultCast,"(long)"), getPrecedence(doResultCast));
 	}
 
 	@Override
