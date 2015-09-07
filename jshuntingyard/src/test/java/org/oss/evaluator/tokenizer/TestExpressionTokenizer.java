@@ -44,6 +44,14 @@ public class TestExpressionTokenizer{
     expressions.add("2L");
     expressions.add("max(10 / 2 * 3, 12)");
     expressions.add("max((float)10 / 2 * (int)3.0, 12)");
+    expressions.add("max((float)10 / 2 * (int)3.0, 12)");
+    expressions.add("(int)3.2f");
+    expressions.add("0 - +4");
+    expressions.add("- 4");
+    expressions.add("-4");
+    expressions.add("0-+4");
+    
+    
 
 
     for(String expression : expressions){

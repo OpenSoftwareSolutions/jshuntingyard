@@ -354,5 +354,17 @@ public class MathTest {
 		AssertUtil.assertIntegerResult(result,4);
 	}
 
+	@Test
+	public void resultCast() {
+		FunctionElementArgument<?> result = new Evaluator("(int)4.3 + 5.7").evaluate();
+		AssertUtil.assertIntegerResult(result,10);
+	}
+
+	@Test
+	public void operatorCast() {
+		FunctionElementArgument<?> result = new Evaluator("(int)4.3 + (int)5.7").evaluate();
+		AssertUtil.assertIntegerResult(result,9);
+	}
+
 	
 }

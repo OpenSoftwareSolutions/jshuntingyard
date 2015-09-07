@@ -28,6 +28,10 @@ public class ExpressionToken {
 		this.token = source.substring(startPos, endPos);
 	}
 
+	public boolean isAtExpressionBegin() {
+		return startPos==0;
+	}
+	
 	public TokenType getType() {
 		return type;
 	}
