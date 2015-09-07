@@ -25,6 +25,7 @@ import org.oss.jshuntingyard.evaluator.FunctionElement;
 import org.oss.jshuntingyard.evaluator.FunctionElement.Associativity;
 import org.oss.jshuntingyard.evaluator.interpreter.Expression;
 import org.oss.jshuntingyard.evaluator.interpreter.ExpressionElement;
+import org.oss.jshuntingyard.evaluator.operator.cast.ResultCastCapable;
 import org.oss.jshuntingyard.lexer.ExpressionToken;
 import org.oss.jshuntingyard.lexer.ExpressionTokenizer;
 import org.oss.jshuntingyard.lexer.TokenType;
@@ -151,6 +152,10 @@ public class ExtendedSHuntingYardParser {
 					continue;
 				} else if (token.getType()==TokenType.OPERATOR) {
 					FunctionElement operator = functionElements.get(token.getToken());
+					if (operator instanceof ResultCastCapable && token.isAtExpressionBegin()) {
+						String namePrefix = ((ResultCastCapable)operator).getNamePrefix();
+						operator = functionElements.get(namePrefix + token.getToken());
+					}
 					// If token is an operator (x) [S3]
 					while (!stack.empty() && isFunctionElement(stack.peek())) {
 						// [S4]
