@@ -39,6 +39,14 @@ public class Equals extends AbstractTwoArgFunctionElement<Boolean,String,String>
 	 */
 	@Override
 	protected FunctionElementArgument<Boolean> execute(FunctionElementArgument<String> a,FunctionElementArgument<String> b) throws IllegalArgumentException {
-		return FunctionArgumentFactory.createObject(a.getValue().equals(b.getValue()));
+		// TODO should a null arguement be converted into an empty string rather than null handling ?
+		boolean result = false;
+		if (a.getValue()==null && b.getValue() == null) {
+			result = true;
+		}
+		if (a.getValue()!=null) {
+			result = a.getValue().equals(b.getValue());
+		}
+		return FunctionArgumentFactory.createObject(result);
 	}
 }
