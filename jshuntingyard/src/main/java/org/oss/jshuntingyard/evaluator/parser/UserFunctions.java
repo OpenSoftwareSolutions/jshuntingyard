@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.oss.jshuntingyard.evaluator.FunctionElement;
+import org.oss.jshuntingyard.evaluator.operator.cast.BigDecimalCast;
 import org.oss.jshuntingyard.evaluator.operator.cast.DoubleCast;
 import org.oss.jshuntingyard.evaluator.operator.cast.FloatCast;
 import org.oss.jshuntingyard.evaluator.operator.cast.IntCast;
@@ -88,10 +89,12 @@ public class UserFunctions {
 		functions.add(new LongCast(false));
 		functions.add(new FloatCast(false));
 		functions.add(new DoubleCast(false));
+		functions.add(new BigDecimalCast(false));
 		functions.add(new IntCast(true));
 		functions.add(new LongCast(true));
 		functions.add(new FloatCast(true));
 		functions.add(new DoubleCast(true));
+		functions.add(new BigDecimalCast(true));
 		// Primitiv
 		functions.add(new Add());
 		functions.add(new Subtract());

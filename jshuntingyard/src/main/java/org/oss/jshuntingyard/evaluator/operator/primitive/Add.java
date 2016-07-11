@@ -38,6 +38,8 @@ public class Add extends AbstractTwoArgNumericFunctionElement {
 			return FunctionArgumentFactory.createObject(getFloat(a) + getFloat(b));
 		case DOUBLE:
 			return FunctionArgumentFactory.createObject(getDouble(a) + getDouble(b));
+		case BIG_DECIMAL:
+			return FunctionArgumentFactory.createObject(getBigDecimal(a).add(getBigDecimal(b)));
 		default:
 			throw new IllegalArgumentException("Unsupported add operation for the types " + a.getType() + " and " + b.getType() + " for expected evaluation to " + evaluatesTo);
 		}

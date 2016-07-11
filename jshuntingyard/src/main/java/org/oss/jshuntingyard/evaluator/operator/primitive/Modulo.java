@@ -12,11 +12,12 @@
  *
  */
 package org.oss.jshuntingyard.evaluator.operator.primitive;
-import org.oss.jshuntingyard.evaluator.AbstractTwoArgFunctionElement;
 import org.oss.jshuntingyard.evaluator.FunctionArgumentFactory;
 import org.oss.jshuntingyard.evaluator.FunctionElementArgument;
+import org.oss.jshuntingyard.evaluator.FunctionElementArgument.ArgumentType;
+import org.oss.jshuntingyard.evaluator.IntegerArgument;
 
-public class Modulo extends AbstractTwoArgFunctionElement<Integer,Integer,Integer> {
+public class Modulo extends AbstractTwoArgNumericFunctionElement {
 
 	public Modulo() {
 		super("%", Precedence.MULTIPLICATIVE);
@@ -24,13 +25,29 @@ public class Modulo extends AbstractTwoArgFunctionElement<Integer,Integer,Intege
 
 
 	@Override
-	protected FunctionElementArgument<Integer> execute(FunctionElementArgument<Integer> a,
-			FunctionElementArgument<Integer> b) throws IllegalArgumentException {
-		return FunctionArgumentFactory.createObject(a.getValue() % b.getValue());
+	protected FunctionElementArgument<?> execute(FunctionElementArgument<?> a,
+			FunctionElementArgument<?> b, ArgumentType evaluatesTo)
+					throws IllegalArgumentException {
+		switch (evaluatesTo) {
+		case INTEGER:
+			return FunctionArgumentFactory.createObject(((IntegerArgument)a).getValue() % ((IntegerArgument)b).getValue());
+		case LONG:
+			return FunctionArgumentFactory.createObject(getLong(a) % getLong(b));
+		case FLOAT:
+			return FunctionArgumentFactory.createObject(getFloat(a) % getFloat(b));
+		case DOUBLE:
+			return FunctionArgumentFactory.createObject(getDouble(a) % getDouble(b));
+		case BIG_DECIMAL:
+			return FunctionArgumentFactory.createObject(getBigDecimal(a).remainder(getBigDecimal(b)));
+		default:
+			throw new IllegalArgumentException("Unsupported Modulo operation for the types " + a.getType() + " and " + b.getType() + " for expected evaluation to " + evaluatesTo);
+		}
 	}
 
 	@Override
 	public boolean isUserFunction() {
 		return false;
 	}
+
+
 }

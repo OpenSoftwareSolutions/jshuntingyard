@@ -27,6 +27,9 @@ public abstract class AbstractTwoArgNumericFunctionElement extends AbstractFunct
 		if (a.getType()==FunctionElementArgument.ArgumentType.DOUBLE || b.getType()==FunctionElementArgument.ArgumentType.DOUBLE) {
 			return FunctionElementArgument.ArgumentType.DOUBLE;
 		}
+		if (a.getType()==FunctionElementArgument.ArgumentType.BIG_DECIMAL || b.getType()==FunctionElementArgument.ArgumentType.BIG_DECIMAL) {
+			return FunctionElementArgument.ArgumentType.BIG_DECIMAL;
+		}
 		if (a.getType()==FunctionElementArgument.ArgumentType.FLOAT || b.getType()==FunctionElementArgument.ArgumentType.FLOAT) {
 			return FunctionElementArgument.ArgumentType.FLOAT;
 		}

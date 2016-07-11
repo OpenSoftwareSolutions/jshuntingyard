@@ -35,6 +35,8 @@ public class Power extends AbstractTwoArgNumericFunctionElement {
 			return FunctionArgumentFactory.createObject(bigA.pow(((FunctionElementArgument<Integer>)b).getValue().intValue()).intValue());
 		case DOUBLE:
 			return FunctionArgumentFactory.createObject(Math.pow(getDouble(a), getDouble(b)));
+		case BIG_DECIMAL:
+			return FunctionArgumentFactory.createObject(getBigDecimal(a).pow(getDouble(b).intValue()));
 		default:
 			throw new IllegalArgumentException("Unsupported power operation for the types " + a.getType() + " and " + b.getType() + " for expected evaluation to " + evaluatesTo);
 		}

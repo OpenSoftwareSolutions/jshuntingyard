@@ -1,5 +1,7 @@
 package org.oss.evaluator;
 
+import java.math.BigDecimal;
+
 import org.junit.Test;
 import org.oss.jshuntingyard.evaluator.FunctionElementArgument;
 import org.oss.jshuntingyard.evaluator.interpreter.Evaluator;
@@ -364,6 +366,12 @@ public class MathTest {
 	public void operatorCast() {
 		FunctionElementArgument<?> result = new Evaluator("(int)4.3 + (int)5.7").evaluate();
 		AssertUtil.assertIntegerResult(result,9);
+	}
+
+	@Test
+	public void operatorCastBigDecimal() {
+		FunctionElementArgument<?> result = new Evaluator("(bigdecimal)4.3 + (bigdecimal)5").evaluate();
+		AssertUtil.assertBigDecimalResult(result,new BigDecimal("9.3"));
 	}
 
 	

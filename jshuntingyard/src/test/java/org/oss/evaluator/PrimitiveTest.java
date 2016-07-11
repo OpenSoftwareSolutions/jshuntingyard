@@ -13,6 +13,8 @@
  */
 package org.oss.evaluator;
 
+import java.math.BigDecimal;
+
 import org.junit.Test;
 import org.oss.jshuntingyard.evaluator.FunctionElementArgument;
 import org.oss.jshuntingyard.evaluator.interpreter.Evaluator;
@@ -25,6 +27,13 @@ public class PrimitiveTest {
 		FunctionElementArgument<?> result = new Evaluator("( 1 + 2 ) * ( 3 / 4.0 ) ^ ( 5 + 6 )").evaluate();
 		double expected = ( 1 + 2 ) * Math.pow( ( 3 / 4.0 ) , ( 5 + 6 ));
 		AssertUtil.assertDoubleResult(result,expected);
+	}
+
+	@Test
+	public void basicOperatorsBdCalc() {
+		FunctionElementArgument<?> result = new Evaluator("( (bigdecimal)1 + (bigdecimal)2 ) * ( (bigdecimal)3 / (bigdecimal)4.0 ) ^ ( (bigdecimal)5 + (bigdecimal)6 )").evaluate();
+		BigDecimal expected = new BigDecimal(( 1 + 2 ) * Math.pow( ( 3 / 4.0 ) , ( 5 + 6 )));
+		AssertUtil.assertBigDecimalResult(result,expected);
 	}
 
 	@Test
@@ -44,6 +53,12 @@ public class PrimitiveTest {
 	public void basicOperatorsDivide() {
 		FunctionElementArgument<?> result = new Evaluator("10 / 2").evaluate();
 		AssertUtil.assertIntegerResult(result,5);
+	}
+	
+	@Test
+	public void basicOperatorsBDDivide() {
+		FunctionElementArgument<?> result = new Evaluator("(bigdecimal)10 / (bigdecimal)2").evaluate();
+		AssertUtil.assertBigDecimalResult(result,new BigDecimal("5"));
 	}
 	
 	@Test

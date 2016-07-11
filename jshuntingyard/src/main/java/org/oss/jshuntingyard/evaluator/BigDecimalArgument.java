@@ -13,10 +13,29 @@
  */
 package org.oss.jshuntingyard.evaluator;
 
-import org.oss.jshuntingyard.evaluator.interpreter.ExpressionElement;
+import java.math.BigDecimal;
 
-public interface FunctionElementArgument<E> extends ExpressionElement {
-	enum ArgumentType {INTEGER, DOUBLE, FLOAT, LONG, BOOLEAN, STRING, NULL, OBJECT, DATE, BIG_DECIMAL};
-	ArgumentType getType();
-	E getValue();
+
+public class BigDecimalArgument extends AbstractFunctionElementArgument<BigDecimal> implements Comparable<BigDecimalArgument>{
+
+	private final BigDecimal bigDecimalValue;
+
+	BigDecimalArgument(BigDecimal doubleValue) {
+		this.bigDecimalValue = doubleValue;
+	}
+
+	@Override
+	public FunctionElementArgument.ArgumentType getType() {
+		return FunctionElementArgument.ArgumentType.BIG_DECIMAL;
+	}
+
+	@Override
+	public BigDecimal getValue() {
+		return bigDecimalValue;
+	}
+
+	@Override
+	public int compareTo(BigDecimalArgument o) {
+		return bigDecimalValue.compareTo(o.getValue());
+	}
 }

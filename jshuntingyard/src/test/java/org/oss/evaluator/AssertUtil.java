@@ -15,8 +15,10 @@ package org.oss.evaluator;
 
 import static org.junit.Assert.assertTrue;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
+import org.oss.jshuntingyard.evaluator.BigDecimalArgument;
 import org.oss.jshuntingyard.evaluator.BooleanArgument;
 import org.oss.jshuntingyard.evaluator.DateArgument;
 import org.oss.jshuntingyard.evaluator.DoubleArgument;
@@ -43,6 +45,12 @@ public class AssertUtil {
 		assertTrue("DoubleArgument expected and not " + result.getClass().getSimpleName(),result instanceof DoubleArgument);
 		DoubleArgument doubleResult = (DoubleArgument) result;
 		assertTrue("Value of " + expected + " expected and not " + doubleResult ,doubleResult.getValue().equals(expected));
+	}
+
+	static void assertBigDecimalResult(FunctionElementArgument<?> result, BigDecimal expected) {
+		assertTrue("BigDecimalArgument expected and not " + result.getClass().getSimpleName(),result instanceof BigDecimalArgument);
+		BigDecimalArgument bigDecimalResult = (BigDecimalArgument) result;
+		assertTrue("Value of " + expected + " expected and not " + bigDecimalResult ,bigDecimalResult.getValue().equals(expected));
 	}
 
 	static void assertFloatResult(FunctionElementArgument<?> result, Float expected) {

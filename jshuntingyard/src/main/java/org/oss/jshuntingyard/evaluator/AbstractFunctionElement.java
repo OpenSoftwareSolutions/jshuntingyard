@@ -1,5 +1,7 @@
 package org.oss.jshuntingyard.evaluator;
 
+import java.math.BigDecimal;
+
 
 
 public abstract class AbstractFunctionElement implements FunctionElement {
@@ -49,9 +51,16 @@ public abstract class AbstractFunctionElement implements FunctionElement {
 	}
 	
 	@SuppressWarnings("unchecked")
+	protected BigDecimal getBigDecimal(FunctionElementArgument<?> arg) {
+		return (BigDecimal) (arg.getType()==FunctionElementArgument.ArgumentType.BIG_DECIMAL ? ((FunctionElementArgument<BigDecimal>)arg).getValue() : 
+			new BigDecimal(arg.getValue().toString()));
+	}
+
+	@SuppressWarnings("unchecked")
 	protected Double getDouble(FunctionElementArgument<?> arg) {
 		return arg.getType()==FunctionElementArgument.ArgumentType.INTEGER ? ((FunctionElementArgument<Integer>)arg).getValue().doubleValue() : 
 			arg.getType()==FunctionElementArgument.ArgumentType.FLOAT ? ((FunctionElementArgument<Float>)arg).getValue().doubleValue() :
+				arg.getType()==FunctionElementArgument.ArgumentType.BIG_DECIMAL ? ((FunctionElementArgument<BigDecimal>)arg).getValue().doubleValue() :
 				((FunctionElementArgument<Double>)arg).getValue();
 	}
 
@@ -74,6 +83,15 @@ public abstract class AbstractFunctionElement implements FunctionElement {
 	protected boolean isDouble(FunctionElementArgument<?>... args) throws IllegalArgumentException {
 		for (FunctionElementArgument<?> arg : args) {
 			if (!(arg.getType()==FunctionElementArgument.ArgumentType.DOUBLE)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	protected boolean isBigDecimal(FunctionElementArgument<?>... args) throws IllegalArgumentException {
+		for (FunctionElementArgument<?> arg : args) {
+			if (!(arg.getType()==FunctionElementArgument.ArgumentType.BIG_DECIMAL)) {
 				return false;
 			}
 		}
@@ -118,7 +136,11 @@ public abstract class AbstractFunctionElement implements FunctionElement {
 
 	protected boolean isNumeric(FunctionElementArgument<?>... args) throws IllegalArgumentException {
 		for (FunctionElementArgument<?> arg : args) {
-			if (!(arg.getType()==FunctionElementArgument.ArgumentType.INTEGER || arg.getType()==FunctionElementArgument.ArgumentType.DOUBLE || arg.getType()==FunctionElementArgument.ArgumentType.LONG || arg.getType()==FunctionElementArgument.ArgumentType.FLOAT)) {
+			if (!(arg.getType()==FunctionElementArgument.ArgumentType.INTEGER || 
+					arg.getType()==FunctionElementArgument.ArgumentType.DOUBLE || 
+					arg.getType()==FunctionElementArgument.ArgumentType.BIG_DECIMAL || 
+					arg.getType()==FunctionElementArgument.ArgumentType.LONG || 
+					arg.getType()==FunctionElementArgument.ArgumentType.FLOAT)) {
 				return false;
 			}
 		}

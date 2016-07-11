@@ -13,6 +13,7 @@
  */
 package org.oss.jshuntingyard.evaluator;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.oss.jshuntingyard.lexer.ExpressionToken;
@@ -71,6 +72,10 @@ public class FunctionArgumentFactory {
 
 	public static FunctionElementArgument<Double> createObject(Double value) {
 		return new DoubleArgument(value);
+	}
+
+	public static FunctionElementArgument<BigDecimal> createObject(BigDecimal value) {
+		return new BigDecimalArgument(value);
 	}
 
 	public static FunctionElementArgument<Float> createObject(Float value) {
