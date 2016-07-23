@@ -108,7 +108,7 @@ public class Evaluator {
 						}
 					}
 					message += ")";
-					logger.info(message);
+					logger.finest(message);
 				}
 				stack.push(result);
 			} else {
