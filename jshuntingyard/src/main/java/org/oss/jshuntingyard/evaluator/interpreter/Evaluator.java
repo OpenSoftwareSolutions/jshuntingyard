@@ -99,7 +99,7 @@ public class Evaluator {
 					}
 				}
 				FunctionElementArgument<?> result = function.execute(args);
-				if (logger.isLoggable(Level.INFO)) {
+				if (logger.isLoggable(Level.FINEST)) {
 					String message = "Evaluated: " + result.getValue() + "[" + result.getType() + "] " + function.getName() + "(";
 					for (int i=0; i<numArgs; i++) {
 						message += args[i].getValue() + "[" + args[i].getType() + "]";
